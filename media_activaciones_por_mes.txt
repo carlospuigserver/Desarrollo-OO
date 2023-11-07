@@ -1,9 +1,0 @@
-La media de activaciones diarias en ABRIL es: 12752.0
-La media de activaciones diarias en AGOSTO es: 10954.0
-La media de activaciones diarias en ENERO es: 11805.0
-La media de activaciones diarias en FEBRERO es: 10886.0
-La media de activaciones diarias en JULIO es: 13698.0
-La media de activaciones diarias en JUNIO es: 13518.0
-La media de activaciones diarias en MARZO es: 12951.0
-La media de activaciones diarias en MAYO es: 13668.0
-La media de activaciones diarias en SEPTIEMBRE es: 12544.0

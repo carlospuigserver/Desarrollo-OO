@@ -30,10 +30,11 @@ class Histograma(GraficosFactory):
         plt.title('Gráfico de Barras')
 
         # Ajustes estéticos para el eje Y
-        plt.yticks(fontsize=10)  # Tamaño de fuente del eje Y
-        plt.gca().yaxis.grid(True)  # Líneas de la cuadrícula para el eje Y
+        plt.yticks(fontsize=10)  
+        plt.gca().yaxis.grid(True)  
 
-        # Mejorar la apariencia del eje Y en el gráfico de barras
+        
+        
         plt.gca().set_ylim([0, datos.max() * 1.1])  # Ajustar límites del eje Y
         plt.gca().yaxis.grid(True)  # Mostrar líneas de cuadrícula en el eje Y
         plt.gca().tick_params(axis='y', labelrotation=0)  # Rotar las etiquetas del eje Y
@@ -44,8 +45,8 @@ class Histograma(GraficosFactory):
 # Cargar los datos del archivo CSV
 datos = pd.read_csv("EJERCICIO 1/resultados/datos_con_duracion.csv", sep=';', encoding='ISO-8859-1')
 
-# Seleccionar las primeras 100 filas de la columna deseada
-datos_columna = datos['Duracion Intervencion (min)'].head(30)  # Reemplaza 'Nombre de la columna' por el nombre real y limita a 100 filas
+# Seleccionar las primeras 30 filas de la columna deseada
+datos_columna = datos['Duracion Intervencion (min)'].head(30)  
 
 # Usar la fábrica para calcular estadísticas
 resultados = EstadisticasFactory.calcular_estadisticas(datos_columna)

@@ -1,0 +1,9 @@
+La media de activaciones por día en ENERO es: 11683.00
+La media de activaciones por día en FEBRERO es: 10809.00
+La media de activaciones por día en MARZO es: 12827.00
+La media de activaciones por día en ABRIL es: 12623.00
+La media de activaciones por día en MAYO es: 13525.00
+La media de activaciones por día en JUNIO es: 13391.00
+La media de activaciones por día en JULIO es: 13545.00
+La media de activaciones por día en AGOSTO es: 10865.00
+La media de activaciones por día en SEPTIEMBRE es: 12401.00

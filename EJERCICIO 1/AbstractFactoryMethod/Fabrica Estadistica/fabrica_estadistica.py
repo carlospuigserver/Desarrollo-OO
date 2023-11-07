@@ -22,7 +22,7 @@ class ResumenEstadistico(EstadisticasFactory):
 # Función que maneja la interacción entre el patrón Abstract Factory y el conjunto de datos
 def interactuar_con_datos(producto, datos):
     resultado = producto.crear_resumen_estadistico(datos)
-    # Presentar los resultados de la manera que desees
+    
     print("Resultados estadísticos de la Duracion Intervencion (min):")
     print("Promedio:", resultado[0])
     print("Mediana:", resultado[1])
@@ -42,9 +42,9 @@ def interactuar_con_datos(producto, datos):
 datos = pd.read_csv("EJERCICIO 1/resultados/datos_con_duracion.csv", sep=';', encoding='ISO-8859-1')
 
 # Seleccionar la columna deseada
-datos_columna = datos['Duracion Intervencion (min)']  # Reemplaza 'Nombre de la columna' por el nombre real
+datos_columna = datos['Duracion Intervencion (min)']  
 
-# Crear instancia del producto concreto (en este caso, ResumenEstadistico)
+# Crear instancia del producto concreto 
 resumen_estadistico = ResumenEstadistico()
 
 # Interactuar con los datos utilizando el producto concreto

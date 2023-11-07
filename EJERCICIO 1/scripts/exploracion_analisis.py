@@ -10,7 +10,7 @@ print(summary)
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Graficar la distribución de una columna usando Seaborn
+# Graficar la distribución de una columna usando Seaborn uy plt
 sns.histplot(data['Distrito'], bins=20)
 plt.xlabel('Valores')
 plt.ylabel('Frecuencia')
@@ -18,7 +18,7 @@ plt.title('Distribución de Valores')
 plt.savefig('EJERCICIO 1/resultados/Distrito.png')
 plt.show()
 
-# Graficar la distribución de una columna usando Seaborn
+# Graficar la distribución de una columna usando Seaborn y plt
 sns.histplot(data['Hospital'], bins=20)
 plt.xlabel('Valores')
 plt.ylabel('Frecuencia')

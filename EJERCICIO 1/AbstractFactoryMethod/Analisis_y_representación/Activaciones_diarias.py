@@ -29,10 +29,12 @@ datos = pd.read_csv("EJERCICIO 1/datos/activaciones_samur_2023(1).csv", sep=';')
 meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE']
 fabrica_histograma = Histograma()
 
-for mes in meses:
-    datos_mes = datos[datos['Mes'] == mes]
-    hora_solicitud = pd.to_datetime(datos_mes['Hora Solicitud'])
-    media_actividades = hora_solicitud.dt.hour.count() / hora_solicitud.dt.normalize().nunique()  # Cálculo de la media diaria
+with open("EJERCICIO 1/AbstractFactoryMethod/Analisis_y_representación/media_actividades.txt", "w") as archivo_txt:
+    for mes in meses:
+        datos_mes = datos[datos['Mes'] == mes]
+        hora_solicitud = pd.to_datetime(datos_mes['Hora Solicitud'])
+        media_actividades = hora_solicitud.dt.hour.count() / hora_solicitud.dt.normalize().nunique()  # Cálculo de la media diaria
 
-    print(f"La media de activaciones por día en {mes} es: {media_actividades:.2f}")
-    fabrica_histograma.crear_histograma(hora_solicitud.dt.hour, f'Histograma de Activaciones en {mes} por Hora del Día')
+        print(f"La media de activaciones por dia en {mes} es: {media_actividades:.2f}")
+        archivo_txt.write(f"La media de activaciones por dia en {mes} es: {media_actividades:.2f}\n")
+        fabrica_histograma.crear_histograma(hora_solicitud.dt.hour, f'Histograma de Activaciones en {mes} por Hora del Día')
