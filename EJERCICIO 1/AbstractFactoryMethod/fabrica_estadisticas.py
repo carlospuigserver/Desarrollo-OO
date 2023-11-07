@@ -18,7 +18,7 @@ def interactuar_con_datos(producto, datos):
     print(resultado)  # Puedes adaptar esto para guardar o mostrar los resultados de la manera que desees
 
 # Cargar los datos del archivo CSV
-datos = pd.read_csv("EJERCICO 1/datos/activaciones_samur_2023(1).csv", sep=';', encoding='ISO-8859-1')
+datos = pd.read_csv("EJERCICIO 1/datos/activaciones_samur_2023(1).csv", sep=';', encoding='ISO-8859-1')
 
 # Crear instancia del producto concreto (en este caso, ResumenEstadistico)
 resumen_estadistico = ResumenEstadistico()
