@@ -1,5 +1,5 @@
-from abc import ABC, abstractmethod
 import pandas as pd
+from abc import ABC, abstractmethod
 
 # Fábrica Abstracta para Análisis Estadísticos
 class EstadisticasFactory(ABC):
@@ -13,16 +13,15 @@ class ResumenEstadistico(EstadisticasFactory):
         return datos.describe()
 
 # Función que maneja la interacción entre el patrón Abstract Factory y el conjunto de datos
-def interactuar_con_datos(factory, producto, datos):
-    resultado = factory.crear_resumen_estadistico(datos)
+def interactuar_con_datos(producto, datos):
+    resultado = producto.crear_resumen_estadistico(datos)
     print(resultado)  # Puedes adaptar esto para guardar o mostrar los resultados de la manera que desees
 
 # Cargar los datos del archivo CSV
-datos = pd.read_csv("EJERCICIO 1/resultados/datos_preprocesados.csv", sep=';', encoding='ISO-8859-1')
+datos = pd.read_csv("EJERCICO 1/datos/activaciones_samur_2023(1).csv", sep=';', encoding='ISO-8859-1')
 
-# Crear instancia de la fábrica de análisis estadísticos y producto concreto
-factory_estadisticas = EstadisticasFactory()
+# Crear instancia del producto concreto (en este caso, ResumenEstadistico)
 resumen_estadistico = ResumenEstadistico()
 
-# Interactuar con los datos utilizando la fábrica de análisis estadísticos
-interactuar_con_datos(factory_estadisticas, resumen_estadistico, datos)
+# Interactuar con los datos utilizando el producto concreto
+interactuar_con_datos(resumen_estadistico, datos)
