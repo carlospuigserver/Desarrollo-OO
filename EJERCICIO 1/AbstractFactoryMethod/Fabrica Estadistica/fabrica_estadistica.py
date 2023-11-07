@@ -31,7 +31,7 @@ def interactuar_con_datos(producto, datos):
     print("Máximo:", resultado[4])
 
     # Guardar los resultados en un archivo de texto
-    with open("EJERCICIO 1/resultados/resultados_estadisticos_otra_columna.txt", 'w') as f:
+    with open("EJERCICIO 1/AbstractFactoryMethod/resultados_estadisticos_otra_columna.txt", 'w') as f:
         f.write(f"Promedio: {resultado[0]}\n")
         f.write(f"Mediana: {resultado[1]}\n")
         f.write(f"Desviacion estandar: {resultado[2]}\n")
