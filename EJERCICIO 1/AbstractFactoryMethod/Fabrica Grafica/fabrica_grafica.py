@@ -39,10 +39,10 @@ class GraficoBarras(GraficosFactory):
         plt.show()
 
 # Cargar los datos del archivo CSV
-datos = pd.read_csv("EJERCICIO 1/resultados/datos_preprocesados.csv", sep=';', encoding='ISO-8859-1')
+datos = pd.read_csv("EJERCICIO 1/resultados/datos_con_duracion.csv", sep=';', encoding='ISO-8859-1')
 
 # Seleccionar la columna deseada
-datos_columna = datos['Hora Solicitud']  # Reemplaza 'Nombre de la columna' por el nombre real
+datos_columna = datos['Duracion Intervencion (min)']  # Reemplaza 'Nombre de la columna' por el nombre real
 
 # Usar la fábrica para calcular estadísticas
 resultados = EstadisticasFactory.calcular_estadisticas(datos_columna)
