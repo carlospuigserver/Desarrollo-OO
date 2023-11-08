@@ -110,3 +110,29 @@ data['Duracion Intervencion (min)'] = (pd.to_datetime(data['Hora Intervencion'])
 data.to_csv('EJERCICIO 1/resultados/datos_con_duracion.csv', sep=';', encoding='ISO-8859-1', index=False)
 ```
 Los resultados de este modelado estructural, incluyendo la columna que refleja la duración de la intervención, son almacenados en un archivo CSV llamado "datos_con_duracion.csv" dentro de la carpeta "resultados".
+
+
+## Parte 3-Abstract Factory:
+
+Aquí se diseña un "Abstract Factory" que permita crear diferentes tipos de análisis o representaciones de los datos
+
+
+### Abstract Factory para Análisis Estadístico:
+Dentro de la carpeta 'AbstractFactoryMethod' se encuentra una subcarpeta denominada 'Fabrica estadistica'. En esta ubicación, se han creado clases y métodos asociados al patrón Abstract Factory para realizar análisis estadísticos sobre los datos. En específico, el archivo 'fabrica_estadistica.py' contiene un ejemplo de implementación de esta fábrica.
+
+Se define una clase Abstracta llamada 'EstadisticasFactory' con un método abstracto para generar un resumen estadístico. A su vez, se crea un producto concreto 'ResumenEstadistico' que implementa este método, permitiendo calcular el promedio, mediana, desviación estándar, valor mínimo y máximo de los datos.
+
+El script interactúa con los datos del archivo CSV 'datos_con_duracion.csv' y, tras procesar la información a través de la clase 'ResumenEstadistico', imprime los resultados estadísticos en la consola y los almacena en un archivo de texto llamado 'resultados_estadisticos_otra_columna.txt' en la misma carpeta.
+
+### Abstract Factory para Visualizaciones Gráficas:
+En el directorio 'AbstractFactoryMethod/Fabrica grafica' se encuentra el archivo 'fabrica_grafica.py', el cual incorpora una implementación de fábricas abstractas para generar visualizaciones gráficas.
+
+Se define una clase abstracta 'GraficosFactory' con métodos abstractos para crear un histograma y un gráfico de barras. Se implementa el producto concreto 'Histograma' para generar estos tipos de gráficos.
+
+El script carga los datos del archivo 'datos_con_duracion.csv', selecciona un conjunto de datos y calcula estadísticas sobre ellos utilizando una fábrica con métodos estáticos. Posteriormente, crea instancias de la clase 'Histograma' para generar visualizaciones gráficas: un histograma y un gráfico de barras, que representan la distribución de la duración de la intervención.
+
+En resumen, se utilizan las fábricas para generar resúmenes estadísticos y visualizaciones gráficas, ofreciendo flexibilidad para realizar diferentes tipos de análisis de datos de manera modular y estructurada.
+
+
+
+
