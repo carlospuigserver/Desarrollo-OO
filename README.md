@@ -112,7 +112,7 @@ data.to_csv('EJERCICIO 1/resultados/datos_con_duracion.csv', sep=';', encoding='
 Los resultados de este modelado estructural, incluyendo la columna que refleja la duración de la intervención, son almacenados en un archivo CSV llamado "datos_con_duracion.csv" dentro de la carpeta "resultados".
 
 
-## Parte 3-Abstract Factory:
+## Punto 3-Abstract Factory:
 
 Aquí se diseña un "Abstract Factory" que permita crear diferentes tipos de análisis o representaciones de los datos
 
@@ -124,6 +124,61 @@ Se define una clase Abstracta llamada 'EstadisticasFactory' con un método abstr
 
 El script interactúa con los datos del archivo CSV 'datos_con_duracion.csv' y, tras procesar la información a través de la clase 'ResumenEstadistico', imprime los resultados estadísticos en la consola y los almacena en un archivo de texto llamado 'resultados_estadisticos_otra_columna.txt' en la misma carpeta.
 
+```
+import pandas as pd
+from abc import ABC, abstractmethod
+
+# Fábrica Abstracta para Análisis Estadísticos
+class EstadisticasFactory(ABC):
+    @abstractmethod
+    def crear_resumen_estadistico(self, datos):
+        pass
+
+# Producto Concreto para Resumen Estadístico
+class ResumenEstadistico(EstadisticasFactory):
+    def crear_resumen_estadistico(self, datos):
+        # Calcula las estadísticas por separado
+        promedio = datos.mean()
+        mediana = datos.median()
+        desviacion_estandar = datos.std()
+        minimo = datos.min()
+        maximo = datos.max()
+
+        return promedio, mediana, desviacion_estandar, minimo, maximo
+
+# Función que maneja la interacción entre el patrón Abstract Factory y el conjunto de datos
+def interactuar_con_datos(producto, datos):
+    resultado = producto.crear_resumen_estadistico(datos)
+    
+    print("Resultados estadísticos de la Duracion Intervencion (min):")
+    print("Promedio:", resultado[0])
+    print("Mediana:", resultado[1])
+    print("Desviaciíon estándar:", resultado[2])
+    print("Mínimo:", resultado[3])
+    print("Máximo:", resultado[4])
+
+    # Guardar los resultados en un archivo de texto
+    with open("EJERCICIO 1/AbstractFactoryMethod/Fabrica Estadistica/resultados_estadisticos_otra_columna.txt", 'w') as f:
+        f.write(f"Promedio: {resultado[0]}\n")
+        f.write(f"Mediana: {resultado[1]}\n")
+        f.write(f"Desviacion estandar: {resultado[2]}\n")
+        f.write(f"Minimo: {resultado[3]}\n")
+        f.write(f"Maximo: {resultado[4]}\n")
+
+# Cargar los datos del archivo CSV
+datos = pd.read_csv("EJERCICIO 1/resultados/datos_con_duracion.csv", sep=';', encoding='ISO-8859-1')
+
+# Seleccionar la columna deseada
+datos_columna = datos['Duracion Intervencion (min)']  
+
+# Crear instancia del producto concreto 
+resumen_estadistico = ResumenEstadistico()
+
+# Interactuar con los datos utilizando el producto concreto
+interactuar_con_datos(resumen_estadistico, datos_columna)
+```
+
+
 ### Abstract Factory para Visualizaciones Gráficas:
 En el directorio 'AbstractFactoryMethod/Fabrica grafica' se encuentra el archivo 'fabrica_grafica.py', el cual incorpora una implementación de fábricas abstractas para generar visualizaciones gráficas.
 
@@ -133,6 +188,67 @@ El script carga los datos del archivo 'datos_con_duracion.csv', selecciona un co
 
 En resumen, se utilizan las fábricas para generar resúmenes estadísticos y visualizaciones gráficas, ofreciendo flexibilidad para realizar diferentes tipos de análisis de datos de manera modular y estructurada.
 
+```
+import pandas as pd
+from abc import ABC, abstractmethod
+import matplotlib.pyplot as plt
+
+# Fábrica para cálculos estadísticos
+class EstadisticasFactory:
+    @staticmethod
+    def calcular_estadisticas(datos):
+        return datos.describe()
+
+# Fábrica Abstracta para Visualizaciones Gráficas
+class GraficosFactory(ABC):
+    @abstractmethod
+    def crear_histograma(self, datos):
+        pass
+
+    @abstractmethod
+    def crear_grafico_barras(self, datos):
+        pass
+
+# Producto Concreto para Histograma
+class Histograma(GraficosFactory):
+    def crear_histograma(self, datos):
+        plt.hist(datos)
+        plt.title('Histograma')
+        plt.show()
+
+    def crear_grafico_barras(self, datos):
+        datos.plot(kind='bar')
+        plt.title('Gráfico de Barras')
+
+        # Ajustes estéticos para el eje Y
+        plt.yticks(fontsize=10)  
+        plt.gca().yaxis.grid(True)  
+
+        
+        
+        plt.gca().set_ylim([0, datos.max() * 1.1])  # Ajustar límites del eje Y
+        plt.gca().yaxis.grid(True)  # Mostrar líneas de cuadrícula en el eje Y
+        plt.gca().tick_params(axis='y', labelrotation=0)  # Rotar las etiquetas del eje Y
+        plt.tight_layout()  # Ajustar el espaciado para evitar superposición
+
+        plt.show()
+
+# Cargar los datos del archivo CSV
+datos = pd.read_csv("EJERCICIO 1/resultados/datos_con_duracion.csv", sep=';', encoding='ISO-8859-1')
+
+# Seleccionar las primeras 30 filas de la columna deseada
+datos_columna = datos['Duracion Intervencion (min)'].head(30)  
+
+# Usar la fábrica para calcular estadísticas
+resultados = EstadisticasFactory.calcular_estadisticas(datos_columna)
+
+# Crear instancias de las fábricas y productos concretos
+fabrica_histograma = Histograma()
+
+# Interactuar con los datos utilizando la fábrica de visualizaciones gráficas
+fabrica_histograma.crear_histograma(datos_columna)
+fabrica_histograma.crear_grafico_barras(datos_columna)
+```
 
 
 
