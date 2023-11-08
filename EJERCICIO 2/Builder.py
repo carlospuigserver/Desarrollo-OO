@@ -123,7 +123,7 @@ class MasaBuilder:
 builder = MasaBuilder()
 
 # Solicitar al usuario que elija el tipo de masa
-masa_seleccionada = input("Elige el tipo de masa: ")
+masa_seleccionada = input("ELIGE TIPO DE MASA : delgada , 48 horas , especial(a elegir ingredientes especiales) , madre , poolish , napolitana , new york style , chicago style , siciliana , cracker :")
 
 if masa_seleccionada.lower() == "delgada":
     builder.elegir_masa_delgada()
@@ -190,8 +190,8 @@ else:
 
 from abc import ABC, abstractmethod
 
-# Interfaz para las salsas
-class Salsa(ABC):
+# Interfaz para las salsas base
+class SalsaBase(ABC):
     @abstractmethod
     def tipo(self):
         pass
@@ -201,63 +201,63 @@ class Salsa(ABC):
         pass
 
 # Implementaciones concretas de salsas
-class SalsaTomateClasica(Salsa):
+class SalsaTomateClasica(SalsaBase):
     def tipo(self):
         return "Salsa de Tomate Clásica"
 
     def es_vegana(self):
         return True
 
-class SalsaMarinara(Salsa):
+class SalsaMarinara(SalsaBase):
     def tipo(self):
         return "Salsa Marinara"
 
     def es_vegana(self):
         return True
 
-class SalsaPesto(Salsa):
+class SalsaPesto(SalsaBase):
     def tipo(self):
         return "Salsa de Pesto"
 
     def es_vegana(self):
         return True
 
-class SalsaBlanca(Salsa):
+class SalsaBlanca(SalsaBase):
     def tipo(self):
         return "Salsa Blanca"
 
     def es_vegana(self):
         return False
 
-class SalsaBBQ(Salsa):
+class SalsaBBQ(SalsaBase):
     def tipo(self):
         return "Salsa BBQ"
 
     def es_vegana(self):
         return True
 
-class SalsaChampinones(Salsa):
+class SalsaChampinones(SalsaBase):
     def tipo(self):
         return "Salsa de Champiñones"
 
     def es_vegana(self):
         return True
 
-class SalsaTomateSinGluten(Salsa):
+class SalsaTomateSinGluten(SalsaBase):
     def tipo(self):
         return "Salsa de Tomate sin Gluten"
 
     def es_vegana(self):
         return True
 
-class SalsasAutor(Salsa):
+class SalsasAutor(SalsaBase):
     def tipo(self):
         return "Salsas de Autor"
 
     def es_vegana(self):
         return True
 
-class EdicionLimitada(Salsa):
+class EdicionLimitada(SalsaBase):
     def tipo(self):
         return "Edición Limitada"
 
@@ -303,7 +303,7 @@ class SalsaBuilder:
 builder = SalsaBuilder()
 
 # Solicitar al usuario que elija el tipo de salsa
-salsa_seleccionada = input("Elige el tipo de salsa: ")
+salsa_seleccionada = input("ELIGE TIPO DE SALSA : tomate clasica , marinara , pesto , blanca , bbq , champinones , tomate sin gluten , autor , edicion limitada(a elegir ingredientes) :")
 
 if salsa_seleccionada.lower() == "tomate clasica":
     builder.elegir_salsa_tomate_clasica()
