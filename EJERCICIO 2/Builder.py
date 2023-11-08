@@ -188,6 +188,9 @@ else:
     print(f"Ha elegido {builder.get_masa().tipo()}")
 
 
+
+
+
 from abc import ABC, abstractmethod
 
 # Interfaz para las salsas base
@@ -358,181 +361,11 @@ else:
 salsa_elegida = builder.get_salsa().tipo()
 
 
-from abc import ABC, abstractmethod
 
-# Clase abstracta para los ingredientes
-class Ingrediente(ABC):
-    @abstractmethod
-    def tipo(self):
-        pass
 
-# Implementaciones concretas de ingredientes
-class Queso(Ingrediente):
-    def tipo(self):
-        return "Queso"
 
-class Mozzarella(Queso):
-    def tipo(self):
-        return "Mozzarella"
 
-class Parmesano(Queso):
-    def tipo(self):
-        return "Parmesano"
 
-class Cheddar(Queso):
-    def tipo(self):
-        return "Cheddar"
-
-# Implementaciones para otros tipos de ingredientes
-class Carne(Ingrediente):
-    def tipo(self):
-        return "Carne"
-
-class Pepperoni(Carne):
-    def tipo(self):
-        return "Pepperoni"
-
-class Pollo(Carne):
-    def tipo(self):
-        return "Pollo"
-
-class Tocino(Carne):
-    def tipo(self):
-        return "Tocino"
-
-class Vegetal(Ingrediente):
-    def tipo(self):
-        return "Vegetal"
-
-class Champinones(Vegetal):
-    def tipo(self):
-        return "Champiñones"
-
-class Pimientos(Vegetal):
-    def tipo(self):
-        def tipo(self):
-            return "Pimientos"
-
-class Cebolla(Vegetal):
-    def tipo(self):
-        return "Cebolla"
-
-class Aceitunas(Vegetal):
-    def tipo(self):
-        return "Aceitunas"
-
-class Tomate(Vegetal):
-    def tipo(self):
-        return "Tomate"
-
-class Espinacas(Vegetal):
-    def tipo(self):
-        return "Espinacas"
-
-class Alcachofas(Vegetal):
-    def tipo(self):
-        return "Alcachofas"
-
-class Berenjena(Vegetal):
-    def tipo(self):
-        return "Berenjena"
-
-class Mariscos(Ingrediente):
-    def tipo(self):
-        return "Mariscos"
-
-class Anchoas(Mariscos):
-    def tipo(self):
-        return "Anchoas"
-
-class Camarones(Mariscos):
-    def tipo(self):
-        return "Camarones"
-
-class Mejillones(Mariscos):
-    def tipo(self):
-        return "Mejillones"
-
-class Calamares(Mariscos):
-    def tipo(self):
-        return "Calamares"
-
-class EspeciasYHierbas(Ingrediente):
-    def tipo(self):
-        return "Especias y Hierbas"
-
-class AlbahacaFresca(EspeciasYHierbas):
-    def tipo(self):
-        return "Albahaca fresca"
-
-class Oregano(EspeciasYHierbas):
-    def tipo(self):
-        return "Orégano"
-
-class Perejil(EspeciasYHierbas):
-    def tipo(self):
-        return "Perejil"
-
-class Ajo(EspeciasYHierbas):
-    def tipo(self):
-        return "Ajo"
-
-class AderezosYOtros(Ingrediente):
-    def tipo(self):
-        return "Aderezos y Otros"
-
-class AceiteDeOliva(AderezosYOtros):
-    def tipo(self):
-        return "Aceite de oliva"
-
-class SalsaBBQ(AderezosYOtros):
-    def tipo(self):
-        return "Salsa BBQ"
-
-class Pesto(AderezosYOtros):
-    def tipo(self):
-        return "Pesto"
-
-class SalsaPicante(AderezosYOtros):
-    def tipo(self):
-        return "Salsa picante"
-
-# Builder de Ingredientes
-class IngredienteBuilder:
-    def __init__(self):
-        self.ingredientes_seleccionados = []
-
-    def elegir_queso(self, queso):
-        if queso:
-            self.ingredientes_seleccionados.append(Queso())
-
-    def elegir_pepperoni(self, pepperoni):
-        if pepperoni:
-            self.ingredientes_seleccionados.append(Pepperoni())
-
-    # Implementar métodos similares para otros tipos de ingredientes
-
-    def get_ingredientes(self):
-        return self.ingredientes_seleccionados
-
-# Cliente para elegir los ingredientes
-builder = IngredienteBuilder()
-
-# Solicitar al usuario que elija los ingredientes
-print("Elige los ingredientes para tu pizza:")
-
-elegir_queso = input("¿Deseas agregar queso? (si/no): ")
-builder.elegir_queso(elegir_queso.lower() == "si")
-
-# Ejemplo de elección de pepperoni
-elegir_pepperoni = input("¿Deseas agregar pepperoni? (si/no): ")
-builder.elegir_pepperoni(elegir_pepperoni.lower() == "si")
-
-# Obtener la lista de ingredientes seleccionados
-ingredientes_seleccionados = builder.get_ingredientes()
-print("Ingredientes seleccionados:")
-for ingrediente in ingredientes_seleccionados:
-    print(ingrediente.tipo())
 
 from abc import ABC, abstractmethod
 
@@ -739,3 +572,15 @@ if elegir_vegetal.lower() == "si":
     print("Elige un tipo de vegetal (Champiñones, Pimientos, Cebolla, Aceitunas, Tomate, Espinacas, Alcachofas, Berenjena):")
     tipo_vegetal = input()
     builder.elegir_vegetal(tipo_vegetal)
+
+
+# Obtener los tipos de ingredientes seleccionados
+ingredientes_seleccionados = [ingrediente.tipo() for ingrediente in builder.get_ingredientes()]
+
+# Mostrar todos los ingredientes seleccionados
+if ingredientes_seleccionados:
+    print("Ingredientes Seleccionados:")
+    for ingrediente in ingredientes_seleccionados:
+        print(f"- {ingrediente}")
+else:
+    print("No se han seleccionado ingredientes para la pizza.")
