@@ -627,6 +627,9 @@ for ingrediente in ingredientes_seleccionados:
     bebidas_recomendadas.update(maridajes.get(ingrediente, []))
 
 # Mostrar las bebidas recomendadas
+# ... (código previo)
+
+# Mostrar las bebidas recomendadas
 if bebidas_recomendadas:
     print("\nBebidas Recomendadas:")
     for bebida in bebidas_recomendadas:
@@ -635,11 +638,9 @@ if bebidas_recomendadas:
     if bebida_elegida in bebidas_recomendadas:
         print(f"Elegiste la bebida: {bebida_elegida}")
     else:
-        print("La bebida seleccionada no está en la lista recomendada.")
+        print("La bebida seleccionada no está en la lista recomendada. Introduce una de las bebidas mostradas.")
 else:
     print("No hay bebidas recomendadas para los ingredientes seleccionados.")
-
-
 
 
 
