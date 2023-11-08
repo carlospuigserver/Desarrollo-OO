@@ -584,3 +584,42 @@ if ingredientes_seleccionados:
         print(f"- {ingrediente}")
 else:
     print("No se han seleccionado ingredientes para la pizza.")
+
+
+
+
+from abc import ABC, abstractmethod
+
+# Técnica de cocción
+class TecnicaCoccion(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+# Implementaciones concretas de técnicas de cocción
+class HornoLenia(TecnicaCoccion):
+    def tipo(self):
+        return "Horno de leña"
+
+class PiedraParaPizza(TecnicaCoccion):
+    def tipo(self):
+        return "Piedra para pizza"
+
+class HornoElectrico(TecnicaCoccion):
+    def tipo(self):
+        return "Horno eléctrico"
+
+# Cliente - Preguntar al usuario por la técnica de cocción
+tecnica_seleccionada = input("Elige la técnica de cocción (Horno de leña, Piedra para pizza, Horno eléctrico): ")
+
+if tecnica_seleccionada.lower() == "horno de leña":
+    builder = HornoLenia()
+    print("Horno de leña seleccionado")
+elif tecnica_seleccionada.lower() == "piedra para pizza":
+    builder = PiedraParaPizza()
+    print("Piedra para pizza seleccionada")
+elif tecnica_seleccionada.lower() == "horno eléctrico":
+    builder = HornoElectrico()
+    print("Horno eléctrico seleccionado")
+else:
+    print("Técnica de cocción no reconocida")
