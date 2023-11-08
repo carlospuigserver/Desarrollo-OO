@@ -155,32 +155,34 @@ elif masa_seleccionada.lower() == "siciliana":
     print("Masa Siciliana seleccionada")
 elif masa_seleccionada.lower() == "cracker":
     builder.elegir_masa_cracker()
-    
-    if builder.get_masa().tiene_ingredientes_especiales():
-        # Solicitar al usuario que elija los ingredientes especiales
-        print("Esta masa permite ingredientes especiales")
-        print("Elige los ingredientes especiales (máximo 2):")
+    print("Masa Cracker seleccionada")
+
+# Después de completar la elección de masa
+if builder.get_masa().tiene_ingredientes_especiales():
+    # Solicitar al usuario que elija un ingrediente especial
+    print("Esta masa permite ingredientes especiales")
+    print("¿Deseas añadir un ingrediente especial? (si/no)")
+    eleccion_ingrediente = input()
+
+    if eleccion_ingrediente.lower() == "si":
+        print("Elige un ingrediente especial:")
         ingredientes = ["trufa", "jamon iberico", "queso gorgonzola", "anchoas", "aceitunas rellenas"]
         for index, ingrediente in enumerate(ingredientes):
             print(f"{index + 1}. {ingrediente}")
 
-        ingredientes_seleccionados = []
-        while len(ingredientes_seleccionados) < 2:
-            seleccion = input("Selecciona un ingrediente (0 para terminar): ")
+        while True:
+            seleccion = input("Selecciona un ingrediente (1-5): ")
             if seleccion.isdigit():
                 seleccion = int(seleccion)
-                if seleccion == 0:
-                    break
-                elif 0 < seleccion <= len(ingredientes):
+                if 1 <= seleccion <= 5:
                     ingrediente_seleccionado = ingredientes[seleccion - 1]
-                    ingredientes_seleccionados.append(ingrediente_seleccionado)
-                    print(f"Seleccionaste: {ingrediente_seleccionado}")
+                    print(f"Ha elegido {builder.get_masa().tipo()} con {ingrediente_seleccionado}")
+                    break
                 else:
-                    print("Opción inválida, intenta de nuevo.")
-
-        print("Ingredientes seleccionados:", ingredientes_seleccionados)
+                    print("Selección inválida. Inténtalo de nuevo.")
+            else:
+                print("Por favor, ingresa un número válido.")
     else:
-        print("Esta masa no tiene ingredientes especiales")
-
-masa_elegida = builder.get_masa().tipo()
-print(f"El cliente ha elegido: {masa_elegida}")
+        print(f"Ha elegido {builder.get_masa().tipo()}")
+else:
+    print(f"Ha elegido {builder.get_masa().tipo()}")
