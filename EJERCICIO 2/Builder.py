@@ -797,6 +797,18 @@ class BordesEspeciales(ABC):
     def tipo(self):
         pass
 
+class BordesEspecialesEspecificos(BordesEspeciales):
+    def tipo(self):
+        bordes_especiales = [
+            "Relleno de queso",
+            "Ajo y queso parmesano",
+            "Crust de queso",
+            "Relleno de pepperoni o jamón",
+            "Relleno de verduras"
+        ]
+        return bordes_especiales
+
+
 # Implementaciones concretas de ingredientes gourmet
 class IngredientesGourmet(ABC):
     @abstractmethod
@@ -817,8 +829,6 @@ class IngredientesGourmetEspecificos(IngredientesGourmet):
         ]
         return ingredientes_gourmet
 
-# Cliente - Preguntar al usuario por la técnica de cocción
-tecnica_seleccionada = input("Elige la técnica de cocción (Horno de leña, Piedra para pizza, Horno eléctrico): ")
 
 
 # Elección de bordes especiales
