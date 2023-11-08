@@ -349,9 +349,10 @@ elif salsa_seleccionada.lower()  == "edicion limitada":
                 print("Selección inválida. Inténtalo de nuevo.")
         else:
             print("Por favor, ingresa un número válido.")
+    builder.elegir_edicion_limitada()
 else:
     print("Opción de salsa no reconocida")
-    builder.elegir_edicion_limitada()
+    
 
     
 salsa_elegida = builder.get_salsa().tipo()
