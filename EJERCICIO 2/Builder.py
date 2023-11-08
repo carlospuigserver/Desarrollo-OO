@@ -831,11 +831,10 @@ class IngredientesGourmetEspecificos(IngredientesGourmet):
 
 
 
-# Elección de bordes especiales
 elegir_borde_especial = input("¿Deseas un borde especial? (si/no): ")
 if elegir_borde_especial.lower() == "si":
     print("Tipos de bordes especiales disponibles:")
-    for borde_especial in BordesEspeciales().tipo():
+    for borde_especial in BordesEspecialesEspecificos().tipo():
         print(f"- {borde_especial}")
     borde_seleccionado = input("Elige el tipo de borde especial: ")
     print(f"Borde especial elegido: {borde_seleccionado}")
