@@ -835,28 +835,3 @@ if elegir_ingredientes_gourmet.lower() == "si":
 
 
 
-class PizzaDirector:
-    def __init__(self):
-        self.masa_builder = MasaBuilder()
-        self.salsa_builder = SalsaBuilder()
-        self.ingredientes_builder = IngredienteBuilder()
-        self.tecnica_builder = TecnicaCoccion()
-        self.presentacion_builder = Presentacion()
-        self.bordes_especiales_builder = BordesEspeciales()
-        self.ingredientes_gourmet_builder = IngredientesGourmet()
-
-    def construir_pizza(self):
-        masa_seleccionada = input("ELIGE TIPO DE MASA : delgada , 48 horas , especial(a elegir ingredientes especiales) , madre , poolish , napolitana , new york style , chicago style , siciliana , cracker :")
-        ingredientes_seleccionados = input("ELIGE TIPO DE INGREDIENTES: queso , carne , marisco , vegetal :")
-        salsa_seleccionada = input("ELIGE TIPO DE SALSA : tomate clasica , marinara , pesto , blanca , bbq , champinones , tomate sin gluten , autor , edicion limitada(a elegir ingredientes) :")
-        salsa_elegida = builder.get_salsa().tipo()
-        tecnica_seleccionada = input("Elige la técnica de cocción (Horno de leña, Piedra para pizza, Horno eléctrico): ")
-       
-       
-        return f"Resumen de la pizza:\n- Masa: {masa}\n- Salsa: {salsa}\n- Ingredientes: {ingredientes}"
-
-
-# Ejemplo de uso
-pizza_director = PizzaDirector()
-resumen_pizza = pizza_director.construir_pizza()
-print(resumen_pizza)
