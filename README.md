@@ -63,3 +63,50 @@ plt.title('Distribución de Valores')
 plt.savefig('EJERCICIO 1/resultados/Hospital.png')
 plt.show()
 ```
+Los histogramas resultantes de las columnas "Distrito" y "Hospital" son guardados como imágenes en la carpeta "resultados".
+
+
+### limpieza_procesamiento.py:
+
+Este script utiliza Pandas para cargar el archivo CSV, eliminar filas con valores nulos en cualquier columna y reemplazar valores faltantes o no deseados por un valor por defecto. Posteriormente, los datos procesados se guardan en un archivo CSV llamado "datos_preprocesados.csv" en la carpeta "resultados".
+```
+import pandas as pd
+
+# Cargar datos para limpieza y preprocesamiento
+data = pd.read_csv("EJERCICIO 1/datos/activaciones_samur_2023(1).csv", sep=";", encoding="ISO-8859-1")
+
+
+
+# Eliminar filas con valores nulos en cualquier columna
+data = data.dropna()
+
+# Reemplazar valores faltantes o no deseados con un valor por defecto
+data.fillna(value='ValorPorDefecto', inplace=True)
+
+
+
+
+# Guardar datos preprocesados
+data.to_csv('EJERCICIO 1/resultados/datos_preprocesados.csv', sep=';', index=False, encoding='ISO-8859-1')
+```
+Los datos procesados, libres de valores nulos o no deseados, se almacenan en un nuevo archivo CSV llamado "datos_preprocesados.csv" dentro de la carpeta "resultados".
+
+
+### modelado_estructuracion.py:
+
+En este script, se carga el archivo de datos preprocesados desde el archivo CSV, se realiza un modelado estructural para el análisis añadiendo una nueva columna que calcula la duración de la intervención y se guardan los resultados en un archivo CSV denominado "datos_con_duracion.csv" en la carpeta "resultados".
+```
+import pandas as pd
+
+# Cargar datos desde el archivo preprocesado
+data = pd.read_csv("EJERCICIO 1/resultados/datos_preprocesados.csv", sep=';', encoding='ISO-8859-1')
+
+
+
+# Realizar modelado y estructuración para análisis,crear una nueva columna calculando la duración de la intervención
+data['Duracion Intervencion (min)'] = (pd.to_datetime(data['Hora Intervencion']) - pd.to_datetime(data['Hora Solicitud'])).dt.total_seconds() / 60
+
+# Guardar resultados del modelado o estructuración si es necesario
+data.to_csv('EJERCICIO 1/resultados/datos_con_duracion.csv', sep=';', encoding='ISO-8859-1', index=False)
+```
+Los resultados de este modelado estructural, incluyendo la columna que refleja la duración de la intervención, son almacenados en un archivo CSV llamado "datos_con_duracion.csv" dentro de la carpeta "resultados".
