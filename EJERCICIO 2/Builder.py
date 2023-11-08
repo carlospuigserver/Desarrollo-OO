@@ -647,64 +647,6 @@ else:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 from abc import ABC, abstractmethod
 
 # Técnica de cocción
@@ -740,6 +682,19 @@ elif tecnica_seleccionada.lower() == "horno eléctrico":
     print("Horno eléctrico seleccionado")
 else:
     print("Técnica de cocción no reconocida")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 from abc import ABC, abstractmethod
@@ -829,3 +784,57 @@ else:
 
 
 
+
+
+
+
+from abc import ABC, abstractmethod
+
+# Implementaciones concretas de tipos de bordes especiales
+
+class BordesEspeciales(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+# Implementaciones concretas de ingredientes gourmet
+class IngredientesGourmet(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+class IngredientesGourmetEspecificos(IngredientesGourmet):
+    def tipo(self):
+        ingredientes_gourmet = [
+            "Trufas",
+            "Caviar",
+            "Foie Gras",
+            "Jamón Ibérico",
+            "Quesos exclusivos",
+            "Setas silvestres",
+            "Mariscos de alta calidad",
+            "Verduras orgánicas y raras"
+        ]
+        return ingredientes_gourmet
+
+# Cliente - Preguntar al usuario por la técnica de cocción
+tecnica_seleccionada = input("Elige la técnica de cocción (Horno de leña, Piedra para pizza, Horno eléctrico): ")
+
+
+# Elección de bordes especiales
+elegir_borde_especial = input("¿Deseas un borde especial? (si/no): ")
+if elegir_borde_especial.lower() == "si":
+    print("Tipos de bordes especiales disponibles:")
+    for borde_especial in BordesEspeciales().tipo():
+        print(f"- {borde_especial}")
+    borde_seleccionado = input("Elige el tipo de borde especial: ")
+    print(f"Borde especial elegido: {borde_seleccionado}")
+
+# Elección de ingredientes gourmet
+elegir_ingredientes_gourmet = input("¿Deseas ingredientes gourmet? (si/no): ")
+if elegir_ingredientes_gourmet.lower() == "si":
+    print("Ingredientes gourmet disponibles:")
+    for ingrediente_gourmet in IngredientesGourmetEspecificos().tipo():
+        print(f"- {ingrediente_gourmet}")
+    ingrediente_seleccionado = input("Elige el ingrediente gourmet: ")
+    print(f"Ingrediente gourmet elegido: {ingrediente_seleccionado}")
