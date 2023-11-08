@@ -365,8 +365,6 @@ salsa_elegida = builder.get_salsa().tipo()
 
 
 
-
-
 from abc import ABC, abstractmethod
 
 # Clase abstracta para los ingredientes
@@ -588,9 +586,6 @@ else:
 
 
 
-
-
-
 maridajes = {
     "Mozzarella": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
     "Parmesano": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
@@ -626,8 +621,7 @@ bebidas_recomendadas = set()
 for ingrediente in ingredientes_seleccionados:
     bebidas_recomendadas.update(maridajes.get(ingrediente, []))
 
-# Mostrar las bebidas recomendadas
-# ... (código previo)
+
 
 # Mostrar las bebidas recomendadas
 if bebidas_recomendadas:
@@ -682,15 +676,6 @@ elif tecnica_seleccionada.lower() == "horno eléctrico":
     print("Horno eléctrico seleccionado")
 else:
     print("Técnica de cocción no reconocida")
-
-
-
-
-
-
-
-
-
 
 
 
