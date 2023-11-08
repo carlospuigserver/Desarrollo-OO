@@ -251,4 +251,73 @@ fabrica_histograma.crear_grafico_barras(datos_columna)
 ```
 
 
+## Punto 4-Análisis y Representación:
 
+El script Activaciones_diarias.py, dentro de la carpeta Analisis_y_representación, la cual está en AbstractFactoryMethod, muestra la implementación del análisis y representación de las activaciones utilizando las fábricas previamente creadas en el patrón Abstract Factory. El objetivo es mostrar la media de activaciones por día en cada mes, y un histograma de las activaciones.
+
+
+### Fábricas Abstractas:
+
+Se utilizan las fábricas definidas previamente para cálculos estadísticos y visualizaciones gráficas en el análisis de los datos.
+
+### Cálculo de la Media de Actividades Diarias:
+
+El script carga el archivo CSV que contiene las activaciones del SAMUR.
+Para cada mes ('ENERO', 'FEBRERO', 'MARZO', ..., 'SEPTIEMBRE'), se calcula la media de activaciones por día.
+Se realiza este cálculo tomando en cuenta el conteo de activaciones por hora, dividiendo esto por el número de días únicos en ese mes para obtener la media diaria.
+
+### Generación de Histogramas:
+
+Se genera un histograma para cada mes, mostrando la distribución de las activaciones a lo largo del día.
+Para cada mes, se toma la hora de solicitud de las activaciones y se crea un histograma para representar esta distribución.
+
+### Resultados:
+
+La información de la media de activaciones por día se imprime en la consola y se guarda en el archivo de texto media_actividades.txt.
+Para cada mes, se muestra la media de actividades por día y se generan los histogramas correspondientes, los cuales se guardan en los archivos de imagen (no mencionado explícitamente, pero se asume que se generan).
+
+Este enfoque modular y estructurado, usando fábricas y clases Abstract Factory, permite una manera más clara y organizada de realizar análisis estadísticos y representaciones gráficas sobre los datos, facilitando la comprensión y la reutilización de funcionalidades.
+
+
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+from abc import ABC, abstractmethod
+
+# Fábrica para cálculos estadísticos
+class EstadisticasFactory:
+    @staticmethod
+    def calcular_estadisticas(datos):
+        return datos.describe()
+
+# Fábrica Abstracta para Visualizaciones Gráficas
+class GraficosFactory(ABC):
+    @abstractmethod
+    def crear_histograma(self, datos):
+        pass
+
+# Producto Concreto para Histograma
+class Histograma(GraficosFactory):
+    def crear_histograma(self, datos, titulo):
+        plt.hist(datos)
+        plt.title(titulo)
+        plt.xlabel('Hora del día')
+        plt.ylabel('Cantidad de activaciones')
+        plt.show()
+
+# Cargar el archivo CSV
+datos = pd.read_csv("EJERCICIO 1/datos/activaciones_samur_2023(1).csv", sep=';')
+
+meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE']
+fabrica_histograma = Histograma()
+
+with open("EJERCICIO 1/AbstractFactoryMethod/Analisis_y_representación/media_actividades.txt", "w") as archivo_txt:
+    for mes in meses:
+        datos_mes = datos[datos['Mes'] == mes]
+        hora_solicitud = pd.to_datetime(datos_mes['Hora Solicitud'])
+        media_actividades = hora_solicitud.dt.hour.count() / hora_solicitud.dt.normalize().nunique()  # Cálculo de la media diaria
+
+        print(f"La media de activaciones por dia en {mes} es: {media_actividades:.2f}")
+        archivo_txt.write(f"La media de activaciones por dia en {mes} es: {media_actividades:.2f}\n")
+        fabrica_histograma.crear_histograma(hora_solicitud.dt.hour, f'Histograma de Activaciones en {mes} por Hora del Día'
+```
