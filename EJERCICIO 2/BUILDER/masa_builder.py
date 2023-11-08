@@ -330,10 +330,30 @@ elif salsa_seleccionada.lower() == "tomate sin gluten":
 elif salsa_seleccionada.lower() == "autor":
     builder.elegir_salsas_autor()
     print("Salsas de Autor seleccionada")
-elif salsa_seleccionada.lower() == "edicion limitada":
-    builder.elegir_edicion_limitada()
-    print("Edición Limitada seleccionada")
+elif salsa_seleccionada.lower()  == "edicion limitada":
+    print("Esta es una edición limitada. Elige una opción para los ingredientes:")
+    print("1. Ingredientes tropicales")
+    print("2. Ingredientes de temporada")
+
+    while True:
+        seleccion = input("Selecciona una opción (1-2): ")
+        if seleccion.isdigit():
+            seleccion = int(seleccion)
+            if seleccion == 1:
+                print("Ha elegido ingredientes tropicales para la Salsa Edición Limitada")
+                break
+            elif seleccion == 2:
+                print("Ha elegido ingredientes de temporada para la Salsa Edición Limitada")
+                break
+            else:
+                print("Selección inválida. Inténtalo de nuevo.")
+        else:
+            print("Por favor, ingresa un número válido.")
 else:
     print("Opción de salsa no reconocida")
+    builder.elegir_edicion_limitada()
 
+    
 salsa_elegida = builder.get_salsa().tipo()
+
+
