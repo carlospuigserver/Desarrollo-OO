@@ -186,3 +186,154 @@ if builder.get_masa().tiene_ingredientes_especiales():
         print(f"Ha elegido {builder.get_masa().tipo()}")
 else:
     print(f"Ha elegido {builder.get_masa().tipo()}")
+
+
+from abc import ABC, abstractmethod
+
+# Interfaz para las salsas
+class Salsa(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+    @abstractmethod
+    def es_vegana(self):
+        pass
+
+# Implementaciones concretas de salsas
+class SalsaTomateClasica(Salsa):
+    def tipo(self):
+        return "Salsa de Tomate Clásica"
+
+    def es_vegana(self):
+        return True
+
+class SalsaMarinara(Salsa):
+    def tipo(self):
+        return "Salsa Marinara"
+
+    def es_vegana(self):
+        return True
+
+class SalsaPesto(Salsa):
+    def tipo(self):
+        return "Salsa de Pesto"
+
+    def es_vegana(self):
+        return True
+
+class SalsaBlanca(Salsa):
+    def tipo(self):
+        return "Salsa Blanca"
+
+    def es_vegana(self):
+        return False
+
+class SalsaBBQ(Salsa):
+    def tipo(self):
+        return "Salsa BBQ"
+
+    def es_vegana(self):
+        return True
+
+class SalsaChampinones(Salsa):
+    def tipo(self):
+        return "Salsa de Champiñones"
+
+    def es_vegana(self):
+        return True
+
+class SalsaTomateSinGluten(Salsa):
+    def tipo(self):
+        return "Salsa de Tomate sin Gluten"
+
+    def es_vegana(self):
+        return True
+
+class SalsasAutor(Salsa):
+    def tipo(self):
+        return "Salsas de Autor"
+
+    def es_vegana(self):
+        return True
+
+class EdicionLimitada(Salsa):
+    def tipo(self):
+        return "Edición Limitada"
+
+    def es_vegana(self):
+        return True
+
+# Builder de salsas
+class SalsaBuilder:
+    def __init__(self):
+        self.salsa = None
+
+    def elegir_salsa_tomate_clasica(self):
+        self.salsa = SalsaTomateClasica()
+
+    def elegir_salsa_marinara(self):
+        self.salsa = SalsaMarinara()
+
+    def elegir_salsa_pesto(self):
+        self.salsa = SalsaPesto()
+
+    def elegir_salsa_blanca(self):
+        self.salsa = SalsaBlanca()
+
+    def elegir_salsa_bbq(self):
+        self.salsa = SalsaBBQ()
+
+    def elegir_salsa_champinones(self):
+        self.salsa = SalsaChampinones()
+
+    def elegir_salsa_tomate_sin_gluten(self):
+        self.salsa = SalsaTomateSinGluten()
+
+    def elegir_salsas_autor(self):
+        self.salsa = SalsasAutor()
+
+    def elegir_edicion_limitada(self):
+        self.salsa = EdicionLimitada()
+
+    def get_salsa(self):
+        return self.salsa
+
+# Cliente - Preguntar al usuario por la salsa
+builder = SalsaBuilder()
+
+# Solicitar al usuario que elija el tipo de salsa
+salsa_seleccionada = input("Elige el tipo de salsa: ")
+
+if salsa_seleccionada.lower() == "tomate clasica":
+    builder.elegir_salsa_tomate_clasica()
+    print("Salsa de Tomate Clásica seleccionada")
+# Otras opciones para elegir salsas
+elif salsa_seleccionada.lower() == "marinara":
+    builder.elegir_salsa_marinara()
+    print("Salsa Marinara seleccionada")
+elif salsa_seleccionada.lower() == "pesto":
+    builder.elegir_salsa_pesto()
+    print("Salsa de Pesto seleccionada")
+elif salsa_seleccionada.lower() == "blanca":
+    builder.elegir_salsa_blanca()
+    print("Salsa Blanca seleccionada")
+elif salsa_seleccionada.lower() == "bbq":
+    builder.elegir_salsa_bbq()
+    print("Salsa BBQ seleccionada")
+elif salsa_seleccionada.lower() == "champinones":
+    builder.elegir_salsa_champinones()
+    print("Salsa de Champiñones seleccionada")
+elif salsa_seleccionada.lower() == "tomate sin gluten":
+    builder.elegir_salsa_tomate_sin_gluten()
+    print("Salsa de Tomate sin Gluten seleccionada")
+elif salsa_seleccionada.lower() == "autor":
+    builder.elegir_salsas_autor()
+    print("Salsas de Autor seleccionada")
+elif salsa_seleccionada.lower() == "edicion limitada":
+    builder.elegir_edicion_limitada()
+    print("Edición Limitada seleccionada")
+else:
+    print("Opción de salsa no reconocida")
+
+salsa_elegida = builder.get_salsa().tipo()
