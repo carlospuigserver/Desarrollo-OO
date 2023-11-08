@@ -623,3 +623,91 @@ elif tecnica_seleccionada.lower() == "horno eléctrico":
     print("Horno eléctrico seleccionado")
 else:
     print("Técnica de cocción no reconocida")
+
+
+from abc import ABC, abstractmethod
+
+# Tipo de presentación
+class Presentacion(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+# Implementaciones concretas de tipos de presentación
+class TablaMadera(Presentacion):
+    def tipo(self):
+        return "Tabla de madera"
+
+class PlatoCeramica(Presentacion):
+    def tipo(self):
+        return "Plato de cerámica clásica"
+
+class Plata(Presentacion):
+    def tipo(self):
+        return "Sobre pltaforma de plata"
+    
+class Oro(Presentacion):   
+    def tipo(self):
+        return "Sobre pltaforma de oro"
+
+class Cristal(Presentacion):
+    def tipo(self):
+        return "Plato de cristal"
+
+class Piedra(Presentacion):
+    def tipo(self):
+        return "Sobre piedra"
+
+class Terracota(Presentacion):
+    def tipo(self):
+        return "Plato de terracota"
+
+class Porcelana(Presentacion):
+    def tipo(self):
+        return "Plato de porcelana"
+
+
+
+# Cliente - Preguntar al usuario por el tipo de presentación
+print("Elige el tipo de presentación:")
+print("1. Tabla de madera")
+print("2. Plato de cerámica clásica")
+print("3. Sobre pltaforma de plata")
+print("4. Sobre plataforma de Oro")
+print("5. Plato de cristal")
+print("6. Sobre piedra")
+print("7. Plato de terracota")
+print("8. Plato de porcelana")
+
+
+presentacion_elegida = input("Selecciona el tipo de presentación (ingresa el número): ")
+
+if presentacion_elegida == "1":
+    builder = TablaMadera()
+    print("Tabla de madera seleccionada")
+elif presentacion_elegida == "2":
+    builder = PlatoCeramica()
+    print("Plato de cerámica clásica seleccionado")
+elif presentacion_elegida == "3":
+    builder = Plata()
+    print("Plataforma de plata seleccionada")
+elif presentacion_elegida == "4":
+    builder = Cristal()
+    print("Plataforma de oro seleccionada")
+elif presentacion_elegida == "5":
+    builder = Cristal()
+    print("Plato de cristal seleccionado")
+elif presentacion_elegida == "6":
+    builder = Piedra()
+    print("Sobre piedra seleccionada")
+elif presentacion_elegida == "7":
+    builder = Terracota()
+    print("Plato de terracota seleccionado")
+elif presentacion_elegida == "8":
+    builder = Porcelana()
+    print("Plato de porcelana seleccionado")
+
+else:
+    print("Tipo de presentación no reconocido")
+
+
