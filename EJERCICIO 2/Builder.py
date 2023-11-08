@@ -358,3 +358,384 @@ else:
 salsa_elegida = builder.get_salsa().tipo()
 
 
+from abc import ABC, abstractmethod
+
+# Clase abstracta para los ingredientes
+class Ingrediente(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+# Implementaciones concretas de ingredientes
+class Queso(Ingrediente):
+    def tipo(self):
+        return "Queso"
+
+class Mozzarella(Queso):
+    def tipo(self):
+        return "Mozzarella"
+
+class Parmesano(Queso):
+    def tipo(self):
+        return "Parmesano"
+
+class Cheddar(Queso):
+    def tipo(self):
+        return "Cheddar"
+
+# Implementaciones para otros tipos de ingredientes
+class Carne(Ingrediente):
+    def tipo(self):
+        return "Carne"
+
+class Pepperoni(Carne):
+    def tipo(self):
+        return "Pepperoni"
+
+class Pollo(Carne):
+    def tipo(self):
+        return "Pollo"
+
+class Tocino(Carne):
+    def tipo(self):
+        return "Tocino"
+
+class Vegetal(Ingrediente):
+    def tipo(self):
+        return "Vegetal"
+
+class Champinones(Vegetal):
+    def tipo(self):
+        return "Champiñones"
+
+class Pimientos(Vegetal):
+    def tipo(self):
+        def tipo(self):
+            return "Pimientos"
+
+class Cebolla(Vegetal):
+    def tipo(self):
+        return "Cebolla"
+
+class Aceitunas(Vegetal):
+    def tipo(self):
+        return "Aceitunas"
+
+class Tomate(Vegetal):
+    def tipo(self):
+        return "Tomate"
+
+class Espinacas(Vegetal):
+    def tipo(self):
+        return "Espinacas"
+
+class Alcachofas(Vegetal):
+    def tipo(self):
+        return "Alcachofas"
+
+class Berenjena(Vegetal):
+    def tipo(self):
+        return "Berenjena"
+
+class Mariscos(Ingrediente):
+    def tipo(self):
+        return "Mariscos"
+
+class Anchoas(Mariscos):
+    def tipo(self):
+        return "Anchoas"
+
+class Camarones(Mariscos):
+    def tipo(self):
+        return "Camarones"
+
+class Mejillones(Mariscos):
+    def tipo(self):
+        return "Mejillones"
+
+class Calamares(Mariscos):
+    def tipo(self):
+        return "Calamares"
+
+class EspeciasYHierbas(Ingrediente):
+    def tipo(self):
+        return "Especias y Hierbas"
+
+class AlbahacaFresca(EspeciasYHierbas):
+    def tipo(self):
+        return "Albahaca fresca"
+
+class Oregano(EspeciasYHierbas):
+    def tipo(self):
+        return "Orégano"
+
+class Perejil(EspeciasYHierbas):
+    def tipo(self):
+        return "Perejil"
+
+class Ajo(EspeciasYHierbas):
+    def tipo(self):
+        return "Ajo"
+
+class AderezosYOtros(Ingrediente):
+    def tipo(self):
+        return "Aderezos y Otros"
+
+class AceiteDeOliva(AderezosYOtros):
+    def tipo(self):
+        return "Aceite de oliva"
+
+class SalsaBBQ(AderezosYOtros):
+    def tipo(self):
+        return "Salsa BBQ"
+
+class Pesto(AderezosYOtros):
+    def tipo(self):
+        return "Pesto"
+
+class SalsaPicante(AderezosYOtros):
+    def tipo(self):
+        return "Salsa picante"
+
+# Builder de Ingredientes
+class IngredienteBuilder:
+    def __init__(self):
+        self.ingredientes_seleccionados = []
+
+    def elegir_queso(self, queso):
+        if queso:
+            self.ingredientes_seleccionados.append(Queso())
+
+    def elegir_pepperoni(self, pepperoni):
+        if pepperoni:
+            self.ingredientes_seleccionados.append(Pepperoni())
+
+    # Implementar métodos similares para otros tipos de ingredientes
+
+    def get_ingredientes(self):
+        return self.ingredientes_seleccionados
+
+# Cliente para elegir los ingredientes
+builder = IngredienteBuilder()
+
+# Solicitar al usuario que elija los ingredientes
+print("Elige los ingredientes para tu pizza:")
+
+elegir_queso = input("¿Deseas agregar queso? (si/no): ")
+builder.elegir_queso(elegir_queso.lower() == "si")
+
+# Ejemplo de elección de pepperoni
+elegir_pepperoni = input("¿Deseas agregar pepperoni? (si/no): ")
+builder.elegir_pepperoni(elegir_pepperoni.lower() == "si")
+
+# Obtener la lista de ingredientes seleccionados
+ingredientes_seleccionados = builder.get_ingredientes()
+print("Ingredientes seleccionados:")
+for ingrediente in ingredientes_seleccionados:
+    print(ingrediente.tipo())
+
+from abc import ABC, abstractmethod
+
+# Clase abstracta para los ingredientes
+class Ingrediente(ABC):
+    @abstractmethod
+    def tipo(self):
+        pass
+
+# Implementaciones concretas de ingredientes
+class Queso(Ingrediente):
+    def tipo(self):
+        return "Queso"
+
+class Mozzarella(Queso):
+    def tipo(self):
+        return "Mozzarella"
+
+class Parmesano(Queso):
+    def tipo(self):
+        return "Parmesano"
+
+class Cheddar(Queso):
+    def tipo(self):
+        return "Cheddar"
+
+class Gouda(Queso):
+    def tipo(self):
+        return "Gouda"
+
+class Provolone(Queso):
+    def tipo(self):
+        return "Provolone"
+
+class Carne(Ingrediente):
+    def tipo(self):
+        return "Carne"
+
+class Pepperoni(Carne):
+    def tipo(self):
+        return "Pepperoni"
+
+class Pollo(Carne):
+    def tipo(self):
+        return "Pollo"
+
+class Jamon(Carne):
+    def tipo(self):
+        return "Jamón"
+
+class Tocino(Carne):
+    def tipo(self):
+        return "Tocino"
+
+class Marisco(Ingrediente):
+    def tipo(self):
+        return "Marisco"
+
+class Anchoas(Marisco):
+    def tipo(self):
+        return "Anchoas"
+
+class Camarones(Marisco):
+    def tipo(self):
+        return "Camarones"
+
+class Mejillones(Marisco):
+    def tipo(self):
+        return "Mejillones"
+
+class Calamares(Marisco):
+    def tipo(self):
+        return "Calamares"
+
+class Vegetal(Ingrediente):
+    def tipo(self):
+        return "Vegetal"
+
+class Champinones(Vegetal):
+    def tipo(self):
+        return "Champiñones"
+
+class Pimientos(Vegetal):
+    def tipo(self):
+        return "Pimientos"
+
+class Cebolla(Vegetal):
+    def tipo(self):
+        return "Cebolla"
+
+class Aceitunas(Vegetal):
+    def tipo(self):
+        return "Aceitunas"
+
+class Tomate(Vegetal):
+    def tipo(self):
+        return "Tomate"
+
+class Espinacas(Vegetal):
+    def tipo(self):
+        return "Espinacas"
+
+class Alcachofas(Vegetal):
+    def tipo(self):
+        return "Alcachofas"
+
+class Berenjena(Vegetal):
+    def tipo(self):
+        return "Berenjena"
+
+# Builder de Ingredientes
+class IngredienteBuilder:
+    def __init__(self):
+        self.ingredientes_seleccionados = []
+
+    def elegir_queso(self, tipo_queso):
+        if tipo_queso:
+            if tipo_queso == "Mozzarella":
+                self.ingredientes_seleccionados.append(Mozzarella())
+            elif tipo_queso == "Parmesano":
+                self.ingredientes_seleccionados.append(Parmesano())
+            elif tipo_queso == "Cheddar":
+                self.ingredientes_seleccionados.append(Cheddar())
+            elif tipo_queso == "Gouda":
+                self.ingredientes_seleccionados.append(Gouda())
+            elif tipo_queso == "Provolone":
+                self.ingredientes_seleccionados.append(Provolone())
+
+    def elegir_carne(self, tipo_carne):
+        if tipo_carne:
+            if tipo_carne == "Pepperoni":
+                self.ingredientes_seleccionados.append(Pepperoni())
+            elif tipo_carne == "Pollo":
+                self.ingredientes_seleccionados.append(Pollo())
+            elif tipo_carne == "Jamon":
+                self.ingredientes_seleccionados.append(Jamon())
+            elif tipo_carne == "Tocino":
+                self.ingredientes_seleccionados.append(Tocino())
+
+    def elegir_marisco(self, tipo_marisco):
+        if tipo_marisco:
+            if tipo_marisco == "Anchoas":
+                self.ingredientes_seleccionados.append(Anchoas())
+            elif tipo_marisco == "Camarones":
+                self.ingredientes_seleccionados.append(Camarones())
+            elif tipo_marisco == "Mejillones":
+                self.ingredientes_seleccionados.append(Mejillones())
+            elif tipo_marisco == "Calamares":
+                self.ingredientes_seleccionados.append(Calamares())
+
+    def elegir_vegetal(self, tipo_vegetal):
+        if tipo_vegetal:
+            if tipo_vegetal == "Champinones":
+                self.ingredientes_seleccionados.append(Champinones())
+            elif tipo_vegetal == "Pimientos":
+                self.ingredientes_seleccionados.append(Pimientos())
+            elif tipo_vegetal == "Cebolla":
+                self.ingredientes_seleccionados.append(Cebolla())
+            elif tipo_vegetal == "Aceitunas":
+                self.ingredientes_seleccionados.append(Aceitunas())
+            elif tipo_vegetal == "Tomate":
+                self.ingredientes_seleccionados.append(Tomate())
+            elif tipo_vegetal == "Espinacas":
+                self.ingredientes_seleccionados.append(Espinacas())
+            elif tipo_vegetal == "Alcachofas":
+                self.ingredientes_seleccionados.append(Alcachofas())
+            elif tipo_vegetal == "Berenjena":
+                self.ingredientes_seleccionados.append(Berenjena())
+
+    def get_ingredientes(self):
+        return self.ingredientes_seleccionados
+
+# Cliente para elegir los ingredientes
+builder = IngredienteBuilder()
+
+# Solicitar al usuario que elija los ingredientes
+print("Elige los ingredientes para tu pizza:")
+
+# Elegir un queso
+elegir_queso = input("¿Deseas agregar queso? (si/no): ")
+if elegir_queso.lower() == "si":
+    print("Elige un tipo de queso (Mozzarella, Parmesano, Cheddar, Gouda, Provolone):")
+    tipo_queso = input()
+    builder.elegir_queso(tipo_queso)
+
+# Elegir una carne
+elegir_carne = input("¿Deseas agregar carne? (si/no): ")
+if elegir_carne.lower() == "si":
+    print("Elige un tipo de carne (Pepperoni, Pollo, Jamon, Tocino):")
+    tipo_carne = input()
+    builder.elegir_carne(tipo_carne)
+
+# Elegir un marisco
+elegir_marisco = input("¿Deseas agregar mariscos? (si/no): ")
+if elegir_marisco.lower() == "si":
+    print("Elige un tipo de marisco (Anchoas, Camarones, Mejillones, Calamares):")
+    tipo_marisco = input()
+    builder.elegir_marisco(tipo_marisco)
+
+# Elegir un vegetal
+elegir_vegetal = input("¿Deseas agregar vegetales? (si/no): ")
+if elegir_vegetal.lower() == "si":
+
+    print("Elige un tipo de vegetal (Champiñones, Pimientos, Cebolla, Aceitunas, Tomate, Espinacas, Alcachofas, Berenjena):")
+    tipo_vegetal = input()
+    builder.elegir_vegetal(tipo_vegetal)
