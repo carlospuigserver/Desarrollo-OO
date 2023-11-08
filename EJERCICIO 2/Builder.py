@@ -588,6 +588,122 @@ else:
 
 
 
+
+
+
+maridajes = {
+    "Mozzarella": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
+    "Parmesano": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
+    "Cheddar": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
+    "Gouda": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
+    "Provolone": ["Vino Tinto", "Vino Blanco", "Cervezas Ale"],
+    "Pepperoni": ["Vino Tinto", "Cerveza Lager o Ale", "Cócteles robustos"],
+    "Pollo": ["Vino Tinto", "Cerveza Lager o Ale", "Cócteles robustos"],
+    "Jamon": ["Vino Tinto", "Cerveza Lager o Ale", "Cócteles robustos"],
+    "Tocino": ["Vino Tinto", "Cerveza Lager o Ale", "Cócteles robustos"],
+    "Anchoas": ["Vino Blanco", "Vino Rosado", "Cervezas claras o cítricas"],
+    "Camarones": ["Vino Blanco", "Vino Rosado", "Cervezas claras o cítricas"],
+    "Mejillones": ["Vino Blanco", "Vino Rosado", "Cervezas claras o cítricas"],
+    "Calamares": ["Vino Blanco", "Vino Rosado", "Cervezas claras o cítricas"],
+    "Champiñones": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Pimientos": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Cebolla": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Aceitunas": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Tomate": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Espinacas": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Alcachofas": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"],
+    "Berenjena": ["Vino Tinto ligero", "Vino Blanco", "Cervezas ligeras"]
+}
+
+
+# Obtener los tipos de ingredientes seleccionados
+ingredientes_seleccionados = [ingrediente.tipo() for ingrediente in builder.get_ingredientes()]
+
+
+
+# Obtener las bebidas recomendadas basadas en los ingredientes seleccionados
+bebidas_recomendadas = set()
+for ingrediente in ingredientes_seleccionados:
+    bebidas_recomendadas.update(maridajes.get(ingrediente, []))
+
+# Mostrar las bebidas recomendadas
+if bebidas_recomendadas:
+    print("\nBebidas Recomendadas:")
+    for bebida in bebidas_recomendadas:
+        print(f"- {bebida}")
+    bebida_elegida = input("Elige la bebida de la lista recomendada: ")
+    if bebida_elegida in bebidas_recomendadas:
+        print(f"Elegiste la bebida: {bebida_elegida}")
+    else:
+        print("La bebida seleccionada no está en la lista recomendada.")
+else:
+    print("No hay bebidas recomendadas para los ingredientes seleccionados.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 from abc import ABC, abstractmethod
 
 # Técnica de cocción
@@ -709,5 +825,6 @@ elif presentacion_elegida == "8":
 
 else:
     print("Tipo de presentación no reconocido")
+
 
 
