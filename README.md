@@ -1273,3 +1273,33 @@ if __name__ == "__main__":
     extras_elegidos = cliente.elegir_extras(builder)
     print(extras_elegidos)
 ```
+
+
+
+## Incorporar un sistema de recomendaciones que sugiera ingredientes, técnicas y maridajes basados en las elecciones previas del cliente.
+
+El módulo cliente.py desencadena una interacción esencial entre los usuarios y el proceso de construcción de una pizza. La implementación de este script sigue varios pasos clave que son fundamentales para el éxito y la utilidad del programa.
+
+### Registro y autenticación de usuarios:
+
+La posibilidad de que los usuarios se registren y autentiquen es vital para un servicio personalizado y seguro. El registro permite a los usuarios guardar sus preferencias y recuerda sus selecciones anteriores. La autenticación garantiza la privacidad y seguridad, al limitar el acceso a la creación de pedidos de pizza solo a usuarios registrados y verificados.
+Clase Cliente:
+
+### La clase Cliente 
+Actúa como un puente entre las preferencias del usuario y la lógica de construcción de la pizza, permitiendo una interfaz intuitiva y amigable para que los usuarios elijan sus preferencias. Cada método dentro de esta clase se enfoca en un aspecto específico de la pizza, desde la masa hasta los extras, facilitando las decisiones del usuario paso a paso.
+
+### Interacción de usuario con Builders:
+Cada método en la clase Cliente interactúa con su Builder respectivo, permitiendo al usuario definir las características de la pizza. La elección de cada componente se almacena en instancias específicas de los builders correspondientes. Esta separación de lógica de construcción de la pizza y selección de preferencias del usuario resulta en un código modular y fácil de mantener.
+
+
+### Interacción y almacenamiento de datos:
+Si el usuario se autentica exitosamente y selecciona las características de la pizza, se almacena el pedido en un archivo CSV. Esta funcionalidad es crucial, ya que permite registrar y rastrear los pedidos realizados por los usuarios. Además, posibilita la personalización de futuras interacciones, aprendiendo de las preferencias pasadas de los usuarios para ofrecer experiencias más adaptadas y satisfactorias.
+
+
+### Flujo de ejecución:
+El flujo de ejecución del programa está estructurado para guiar a los usuarios a través de las distintas etapas de selección de componentes de pizza. Desde el registro inicial hasta la selección de los ingredientes, bebidas y extras, el programa facilita una experiencia de usuario intuitiva y fluida.
+Estos pasos, centrados en la experiencia del usuario, la modularidad y el almacenamiento de datos, son vitales para la eficiencia y el éxito del programa. Permiten una interacción ágil y agradable, la gestión eficaz de la información, y la adaptación a las preferencias y necesidades del usuario, lo que conduce a una experiencia de usuario más satisfactoria y personalizada.
+
+
+
+
