@@ -323,3 +323,953 @@ with open("EJERCICIO 1/AbstractFactoryMethod/Analisis_y_representación/media_ac
         archivo_txt.write(f"La media de activaciones por dia en {mes} es: {media_actividades:.2f}\n")
         fabrica_histograma.crear_histograma(hora_solicitud.dt.hour, f'Histograma de Activaciones en {mes} por Hora del Día'
 ```
+
+
+
+
+# EJERCICIO 2 
+Prácticamente todo el trabajo de este ejercicio ha sido realizado en otro repositorio, el cual cree en un momento dado por la incapacidad de hacerlo en este, no me estaba funcionando, así que en este, gran parte de los commits han sido copiar y pegar el código y por supuesto la estructura del otro repositorio. Por el remoto caso de que interese mirar el repositorio. aquí está su link: https://github.com/carlospuigserver/pizza2.git
+
+## Contexto:
+Sistema Integral de Creación y Gestión de Pizzas Gourmet con Almacenamiento en CSV utilizando el Patrón Builder
+
+La reconocida cadena de pizzerías gourmet "Delizioso" ha decidido lanzar una plataforma digital para permitir a sus clientes diseñar y personalizar sus pizzas al máximo detalle. Esta pizzería es conocida por su meticulosidad y su vasto menú de ingredientes, técnicas de cocción y presentaciones. Además de la personalización, "Delizioso" busca almacenar cada pizza diseñada por sus clientes en un archivo CSV para análisis posterior, recomendaciones personalizadas y marketing dirigido.
+
+Características a considerar:
+
+1-Tipo de masa: Variedades premium desde masas delgadas hasta masas fermentadas por 48 horas, con opciones de ingredientes especiales.
+
+2-Salsa base: Desde salsas clásicas hasta salsas de autor, incluyendo opciones veganas y de edición limitada.
+
+3-Ingredientes principales: Una gama que abarca desde ingredientes locales hasta importados de especialidad, todos categorizados por su origen, tipo y rareza.
+
+4-Técnicas de cocción: Diversidad que abarca desde hornos tradicionales hasta técnicas modernas de cocina molecular.
+
+5-Presentación: Opciones que van desde estilos clásicos hasta presentaciones que son verdaderas obras de arte.
+
+6-Maridajes recomendados: Una base de datos con cientos de opciones de vinos, cervezas y cocteles, con recomendaciones basadas en las elecciones de los ingredientes de la pizza.
+
+7-Extras y finalizaciones: Desde bordes especiales hasta acabados con ingredientes gourmet como trufas y caviar.
+
+## Objetivos:
+Diseñar un sistema que permita a los clientes construir su pizza paso a paso utilizando el patrón Builder.
+
+Asegurar que cada elección sea validada para ser compatible con las selecciones previas del cliente.
+
+Incorporar un sistema de recomendaciones que sugiera ingredientes, técnicas y maridajes basados en las elecciones previas del cliente.
+
+Desarrollar un módulo que guarde cada pizza personalizada en un archivo CSV, almacenando cada detalle, desde los ingredientes hasta el maridaje recomendado.
+
+Crear una funcionalidad que lea del archivo CSV y pueda reconstruir la pizza para su visualización, edición o reorden.
+
+Garantizar la flexibilidad del sistema para futuras adiciones o modificaciones, ya que la pizzería está en constante innovación.
+
+Desarrollar una interfaz de usuario amigable que guíe al cliente en el proceso de creación, ofreciendo información relevante sobre cada elección y facilitando la toma de decisiones.
+
+Implementar medidas de seguridad para garantizar la integridad de los datos almacenados y la privacidad de las elecciones de los clientes.
+
+
+## Diseñar un sistema que permita a los clientes construir su pizza paso a paso utilizando el patrón Builder.
+
+El patrón de diseño Builder se emplea cuando se necesita crear un objeto complejo, compuesto de partes que deben ensamblarse en varios pasos, mientras se tiene la posibilidad de crear diferentes representaciones del mismo objeto. En el contexto de la programación de pizza, el patrón Builder se adapta bien, ya que una pizza tiene muchos componentes (masa, salsa, ingredientes, etc.) y, dependiendo de las preferencias del cliente, se pueden ensamblar de múltiples maneras para crear distintos tipos de pizza. Los Builders ayudan a separar el proceso de creación de objetos complejos, permitiendo la construcción paso a paso, con la posibilidad de variar los componentes para obtener diferentes configuraciones.
+
+### MasaPizzaBuilder
+El MasaPizzaBuilder se enfoca en la construcción de la masa de la pizza. Establece métodos para construir diferentes tipos de masas, como masa delgada, masa de 48 horas, estilo Napolitano, entre otros. Además, proporciona un método para obtener la masa construida. Su finalidad es aislar la construcción de la masa de la pizza de la lógica del negocio general y permitir la variación en la construcción de la masa. Este se implementa en masa_builder.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class MasaPizza:
+    def __init__(self):
+        self.tipo = ""
+        
+    def __str__(self):
+        return f"Tipo de masa elegida: {self.tipo}"
+
+# Builder abstracto
+class BuilderMasaPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_delgada(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_48_horas(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_madre(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_poolish(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_napolitana(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_new_york_style(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_chicago_style(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_siciliana(self):
+        pass
+
+    @abstractmethod
+    def construir_masa_cracker(self):
+        pass
+
+    @abstractmethod
+    def obtener_masa(self):
+        pass
+
+# Concrete Builder
+class MasaPizzaBuilder(BuilderMasaPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.masa = MasaPizza()
+
+    def construir_masa_delgada(self):
+        self.masa.tipo = "Delgada"
+
+    def construir_masa_48_horas(self):
+        self.masa.tipo = "48 Horas"
+
+    def construir_masa_madre(self):
+        self.masa.tipo = "Madre"
+
+    def construir_masa_poolish(self):
+        self.masa.tipo = "Poolish"
+
+    def construir_masa_napolitana(self):
+        self.masa.tipo = "Napolitana"
+
+    def construir_masa_new_york_style(self):
+        self.masa.tipo = "New York Style"
+
+    def construir_masa_chicago_style(self):
+        self.masa.tipo = "Chicago Style"
+
+    def construir_masa_siciliana(self):
+        self.masa.tipo = "Siciliana"
+
+    def construir_masa_cracker(self):
+        self.masa.tipo = "Cracker"
+
+    def obtener_masa(self):
+        return self.masa
+
+# Director (Cliente)
+class Cliente:
+    def elegir_masa(self, builder):
+        print("Tipos de masa disponibles:")
+        tipos_masa = [
+            "Delgada",
+            "48 Horas",
+            "Madre",
+            "Poolish",
+            "Napolitana",
+            "New York Style",
+            "Chicago Style",
+            "Siciliana",
+            "Cracker"
+        ]
+
+        print("Elija el tipo de masa escribiendo su nombre:")
+        for tipo in tipos_masa:
+            print(f"- {tipo}")
+
+        tipo_elegido = input("Su elección: ").capitalize()
+
+        if tipo_elegido == "Delgada":
+            builder.construir_masa_delgada()
+        elif tipo_elegido == "48 Horas":
+            builder.construir_masa_48_horas()
+        elif tipo_elegido == "Madre":
+            builder.construir_masa_madre()
+        elif tipo_elegido == "Poolish":
+            builder.construir_masa_poolish()
+        elif tipo_elegido == "Napolitana":
+            builder.construir_masa_napolitana()
+        elif tipo_elegido == "New York Style":
+            builder.construir_masa_new_york_style()
+        elif tipo_elegido == "Chicago Style":
+            builder.construir_masa_chicago_style()
+        elif tipo_elegido == "Siciliana":
+            builder.construir_masa_siciliana()
+        elif tipo_elegido == "Cracker":
+            builder.construir_masa_cracker()
+        else:
+            print("Tipo de masa no válido")
+
+        return builder.obtener_masa()
+
+if __name__ == "__main__":
+    builder = MasaPizzaBuilder()
+    cliente = Cliente()
+
+    masa_elegida = cliente.elegir_masa(builder)
+    print(masa_elegida)
+```
+
+
+
+### SalsaPizzaBuilder
+El SalsaPizzaBuilder está diseñado para crear distintos tipos de salsas para pizzas. Proporciona métodos para la construcción de salsas como la marinara, de pesto, BBQ, entre otras. Al igual que el MasaPizzaBuilder, su objetivo principal es encapsular la lógica de construcción de la salsa y permitir configuraciones personalizadas. Este se implementa en salsa_builder.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class SalsaPizza:
+    def __init__(self):
+        self.tipo = ""
+        
+    def __str__(self):
+        return f"Tipo de salsa elegida: {self.tipo}"
+
+# Builder abstracto
+class BuilderSalsaPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_tomate_clasica(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_marinara(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_pesto(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_blanca(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_bbq(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_champinones(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_tomate_sin_gluten(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_autor(self):
+        pass
+
+    @abstractmethod
+    def construir_salsa_edicion_limitada(self):
+        pass
+
+    @abstractmethod
+    def obtener_salsa(self):
+        pass
+
+# Concrete Builder
+class SalsaPizzaBuilder(BuilderSalsaPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.salsa = SalsaPizza()
+
+    def construir_salsa_tomate_clasica(self):
+        self.salsa.tipo = "Tomate Clásica"
+
+    def construir_salsa_marinara(self):
+        self.salsa.tipo = "Marinara"
+
+    def construir_salsa_pesto(self):
+        self.salsa.tipo = "Pesto"
+
+    def construir_salsa_blanca(self):
+        self.salsa.tipo = "Blanca"
+
+    def construir_salsa_bbq(self):
+        self.salsa.tipo = "BBQ"
+
+    def construir_salsa_champinones(self):
+        self.salsa.tipo = "Champiñones"
+
+    def construir_salsa_tomate_sin_gluten(self):
+        self.salsa.tipo = "Tomate sin gluten"
+
+    def construir_salsa_autor(self):
+        self.salsa.tipo = "Autor"
+
+    def construir_salsa_edicion_limitada(self):
+        self.salsa.tipo = "Edición Limitada"
+
+    def obtener_salsa(self):
+        return self.salsa
+
+# Director (Cliente)
+class Cliente:
+    def elegir_salsa(self, builder):
+        print("Tipos de salsa disponibles:")
+        tipos_salsa = [
+            "Tomate Clásica",
+            "Marinara",
+            "Pesto",
+            "Blanca",
+            "BBQ",
+            "Champiñones",
+            "Tomate sin gluten",
+            "Autor",
+            "Edición Limitada"
+        ]
+
+        print("Elija el tipo de salsa escribiendo su nombre:")
+        for tipo in tipos_salsa:
+            print(f"- {tipo}")
+
+        tipo_elegido = input("Su elección: ").capitalize()
+
+        if tipo_elegido == "Tomate Clásica":
+            builder.construir_salsa_tomate_clasica()
+        elif tipo_elegido == "Marinara":
+            builder.construir_salsa_marinara()
+        elif tipo_elegido == "Pesto":
+            builder.construir_salsa_pesto()
+        elif tipo_elegido == "Blanca":
+            builder.construir_salsa_blanca()
+        elif tipo_elegido == "BBQ":
+            builder.construir_salsa_bbq()
+        elif tipo_elegido == "Champiñones":
+            builder.construir_salsa_champinones()
+        elif tipo_elegido == "Tomate sin gluten":
+            builder.construir_salsa_tomate_sin_gluten()
+        elif tipo_elegido == "Autor":
+            builder.construir_salsa_autor()
+        elif tipo_elegido == "Edición Limitada":
+            builder.construir_salsa_edicion_limitada()
+        else:
+            print("Tipo de salsa no válido")
+
+        return builder.obtener_salsa()
+
+if __name__ == "__main__":
+    builder = SalsaPizzaBuilder()
+    cliente = Cliente()
+
+    salsa_elegida = cliente.elegir_salsa(builder)
+    print(salsa_elegida)
+```
+
+
+### IngredientesPizzaBuilder
+Este builder se encarga de la construcción de los ingredientes para la pizza. Define métodos para agregar diferentes tipos de ingredientes, como carne, queso, mariscos y vegetales. Ofrece flexibilidad para añadir o quitar ingredientes de la pizza, permitiendo la personalización de acuerdo a las preferencias del cliente.Es implementado en ingredientes_builder.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class IngredientesPizza:
+    def __init__(self):
+        self.queso = []
+        self.carne = []
+        self.mariscos = []
+        self.vegetales = []
+        
+    def __str__(self):
+        return (f"Ingredientes elegidos: "
+                f"\nQueso: {', '.join(self.queso) if self.queso else 'Ninguno'}"
+                f"\nCarne: {', '.join(self.carne) if self.carne else 'Ninguno'}"
+                f"\nMariscos: {', '.join(self.mariscos) if self.mariscos else 'Ninguno'}"
+                f"\nVegetales: {', '.join(self.vegetales) if self.vegetales else 'Ninguno'}")
+
+# Builder abstracto
+class BuilderIngredientesPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def anadir_queso(self):
+        pass
+
+    @abstractmethod
+    def anadir_carne(self):
+        pass
+
+    @abstractmethod
+    def anadir_mariscos(self):
+        pass
+
+    @abstractmethod
+    def anadir_vegetales(self):
+        pass
+
+    @abstractmethod
+    def obtener_ingredientes(self):
+        pass
+
+# Concrete Builder
+class IngredientesPizzaBuilder(BuilderIngredientesPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.ingredientes = IngredientesPizza()
+
+    def anadir_queso(self):
+        print("¿Desea agregar queso? (Sí/No)")
+        respuesta = input()
+        if respuesta.lower() == "sí" or respuesta.lower() == "si":
+            quesos = [
+                "Mozzarella", "Parmesano", "Cheddar", "Gouda", "Provolone"
+            ]
+            print("Tipos de queso disponibles:")
+            for queso in quesos:
+                print(f"- {queso}")
+            queso_elegido = input("Elija el tipo de queso: ").capitalize()
+            if queso_elegido in quesos:
+                self.ingredientes.queso.append(queso_elegido)
+            else:
+                print("Tipo de queso no válido")
+
+    def anadir_carne(self):
+        print("¿Desea agregar carne? (Sí/No)")
+        respuesta = input()
+        if respuesta.lower() == "sí" or respuesta.lower() == "si":
+            carnes = [
+                "Pepperoni", "Pollo", "Jamon", "Tocino"
+            ]
+            print("Tipos de carne disponibles:")
+            for carne in carnes:
+                print(f"- {carne}")
+            carne_elegida = input("Elija el tipo de carne: ").capitalize()
+            if carne_elegida in carnes:
+                self.ingredientes.carne.append(carne_elegida)
+            else:
+                print("Tipo de carne no válido")
+
+    def anadir_mariscos(self):
+        print("¿Desea agregar mariscos? (Sí/No)")
+        respuesta = input()
+        if respuesta.lower() == "sí" or respuesta.lower() == "si":
+            mariscos = [
+                "Anchoas", "Camarones", "Mejillones", "Calamares"
+            ]
+            print("Tipos de mariscos disponibles:")
+            for marisco in mariscos:
+                print(f"- {marisco}")
+            marisco_elegido = input("Elija el tipo de marisco: ").capitalize()
+            if marisco_elegido in mariscos:
+                self.ingredientes.mariscos.append(marisco_elegido)
+            else:
+                print("Tipo de marisco no válido")
+
+    def anadir_vegetales(self):
+        print("¿Desea agregar vegetales? (Sí/No)")
+        respuesta = input()
+        if respuesta.lower() == "sí" or respuesta.lower() == "si":
+            vegetales = [
+                "Champiñones", "Pimientos", "Cebolla", "Aceitunas", "Tomate", "Espinacas", "Alcachofas", "Berenjena"
+            ]
+            print("Tipos de vegetales disponibles:")
+            for vegetal in vegetales:
+                print(f"- {vegetal}")
+            vegetal_elegido = input("Elija el tipo de vegetal: ").capitalize()
+            if vegetal_elegido in vegetales:
+                self.ingredientes.vegetales.append(vegetal_elegido)
+            else:
+                print("Tipo de vegetal no válido")
+
+    def obtener_ingredientes(self):
+        return self.ingredientes
+
+# Cliente
+# Cliente
+class Cliente:
+    def elegir_ingredientes(self, builder):
+        print("Seleccione los ingredientes:")
+        builder.anadir_queso()
+        builder.anadir_carne()
+        builder.anadir_mariscos()
+        builder.anadir_vegetales()
+        return builder.obtener_ingredientes()
+
+if __name__ == "__main__":
+    builder = IngredientesPizzaBuilder()
+    cliente = Cliente()
+
+    ingredientes_elegidos = cliente.elegir_ingredientes(builder)
+    print(ingredientes_elegidos)
+```
+
+
+
+### BebidaPizzaPizzaBuilder
+La BebidaPizzaBuildder se centra en definir los maridajes de la pizza con bebidas. Proporciona métodos para construir diferentes tipos de bebidas que pueden complementar la pizza, como vino blanco, tinto, cerveza, etc. Permite elegir la bebida más adecuada para acompañar el tipo de pizza seleccionada. Este lo vemos implementado en maridajes_builder.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class BebidaPizza:
+    def __init__(self):
+        self.tipo = ""
+        
+    def __str__(self):
+        return f"Tipo de bebida elegida: {self.tipo}"
+
+# Builder abstracto
+class BuilderBebidaPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def construir_vino_blanco(self):
+        pass
+
+    @abstractmethod
+    def construir_vino_tinto(self):
+        pass
+
+    @abstractmethod
+    def construir_vino_rosado(self):
+        pass
+
+    @abstractmethod
+    def construir_cerveza(self):
+        pass
+
+    @abstractmethod
+    def construir_coctel(self):
+        pass
+
+    @abstractmethod
+    def obtener_bebida(self):
+        pass
+
+# Concrete Builder
+class BebidaPizzaBuilder(BuilderBebidaPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.bebida = BebidaPizza()
+
+    def construir_vino_blanco(self):
+        self.bebida.tipo = "Vino Blanco"
+
+    def construir_vino_tinto(self):
+        self.bebida.tipo = "Vino Tinto"
+
+    def construir_vino_rosado(self):
+        self.bebida.tipo = "Vino Rosado"
+
+    def construir_cerveza(self):
+        self.bebida.tipo = "Cerveza"
+
+    def construir_coctel(self):
+        self.bebida.tipo = "Coctel"
+
+    def obtener_bebida(self):
+        return self.bebida
+
+# Cliente
+class Cliente:
+    def elegir_bebida(self, builder):
+        print("Tipos de bebidas disponibles:")
+        tipos_bebida = [
+            "Vino Blanco",
+            "Vino Tinto",
+            "Vino Rosado",
+            "Cerveza",
+            "Coctel"
+        ]
+
+        print("Elija el tipo de bebida escribiendo su nombre:")
+        for tipo in tipos_bebida:
+            print(f"- {tipo}")
+
+        tipo_elegido = input("Su elección: ").capitalize()
+
+        if tipo_elegido == "Vino Blanco":
+            builder.construir_vino_blanco()
+        elif tipo_elegido == "Vino Tinto":
+            builder.construir_vino_tinto()
+        elif tipo_elegido == "Vino Rosado":
+            builder.construir_vino_rosado()
+        elif tipo_elegido == "Cerveza":
+            builder.construir_cerveza()
+        elif tipo_elegido == "Coctel":
+            builder.construir_coctel()
+        else:
+            print("Tipo de bebida no válido")
+
+        return builder.obtener_bebida()
+
+if __name__ == "__main__":
+    builder = BebidaPizzaBuilder()
+    cliente = Cliente()
+
+    bebida_elegida = cliente.elegir_bebida(builder)
+    print(bebida_elegida)
+```
+
+
+### CoccionPizzaBuilder
+Este builder se encarga de la técnica de cocción de la pizza. Ofrece métodos para construir técnicas de cocción, como el horno de leña, eléctrico, piedra para pizzas y parrilla para pizzas. Permite seleccionar la técnica de cocción deseada para la preparación de la pizza. Este esta implementado en coccion_pizza.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class CoccionPizza:
+    def __init__(self):
+        self.metodo = ""
+        
+    def __str__(self):
+        return f"Método de cocción elegido: {self.metodo}"
+
+# Builder abstracto
+class BuilderCoccionPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def construir_horno_lena(self):
+        pass
+
+    @abstractmethod
+    def construir_horno_electrico(self):
+        pass
+
+    @abstractmethod
+    def construir_piedra_pizzas(self):
+        pass
+
+    @abstractmethod
+    def construir_parrilla_pizzas(self):
+        pass
+
+    @abstractmethod
+    def obtener_coccion(self):
+        pass
+
+# Concrete Builder
+class CoccionPizzaBuilder(BuilderCoccionPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.coccion = CoccionPizza()
+
+    def construir_horno_lena(self):
+        self.coccion.metodo = "Horno de leña"
+
+    def construir_horno_electrico(self):
+        self.coccion.metodo = "Horno eléctrico"
+
+    def construir_piedra_pizzas(self):
+        self.coccion.metodo = "Piedra para pizzas"
+
+    def construir_parrilla_pizzas(self):
+        self.coccion.metodo = "Parrilla para pizzas"
+
+    def obtener_coccion(self):
+        return self.coccion
+
+# Director (Cliente)
+class Cliente:
+    def elegir_coccion(self, builder):
+        print("Métodos de cocción disponibles:")
+        metodos_coccion = [
+            "Horno de leña",
+            "Horno eléctrico",
+            "Piedra para pizzas",
+            "Parrilla para pizzas"
+        ]
+
+        print("Elija el método de cocción escribiendo su nombre:")
+        for metodo in metodos_coccion:
+            print(f"- {metodo}")
+
+        metodo_elegido = input("Su elección: ").capitalize()
+
+        if metodo_elegido == "Horno de leña":
+            builder.construir_horno_lena()
+        elif metodo_elegido == "Horno eléctrico":
+            builder.construir_horno_electrico()
+        elif metodo_elegido == "Piedra para pizzas":
+            builder.construir_piedra_pizzas()
+        elif metodo_elegido == "Parrilla para pizzas":
+            builder.construir_parrilla_pizzas()
+        else:
+            print("Método de cocción no válido")
+
+        return builder.obtener_coccion()
+
+if __name__ == "__main__":
+    builder = CoccionPizzaBuilder()
+    cliente = Cliente()
+
+    coccion_elegida = cliente.elegir_coccion(builder)
+    print(coccion_elegida)
+```
+
+
+
+### PresentacionPizzaBuilder
+El PresentacionPizzaBuilder define cómo se presentará la pizza. Ofrece métodos para construir diferentes tipos de presentaciones, como tabla de madera, plato de cerámica clásica, plato de cristal, entre otros. Facilita la selección de la presentación de la pizza.
+
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class PresentacionPizza:
+    def __init__(self):
+        self.tipo = ""
+        
+    def __str__(self):
+        return f"Tipo de presentación elegida: {self.tipo}"
+
+# Builder abstracto
+class BuilderPresentacionPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def construir_tabla_madera(self):
+        pass
+
+    @abstractmethod
+    def construir_plato_ceramica_clasica(self):
+        pass
+
+    @abstractmethod
+    def construir_plataforma_plata(self):
+        pass
+
+    @abstractmethod
+    def construir_plataforma_oro(self):
+        pass
+
+    @abstractmethod
+    def construir_plato_cristal(self):
+        pass
+
+    @abstractmethod
+    def construir_sobre_piedra(self):
+        pass
+
+    @abstractmethod
+    def construir_plato_terracota(self):
+        pass
+
+    @abstractmethod
+    def construir_plato_porcelana(self):
+        pass
+
+    @abstractmethod
+    def obtener_presentacion(self):
+        pass
+
+# Concrete Builder
+class PresentacionPizzaBuilder(BuilderPresentacionPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.presentacion = PresentacionPizza()
+
+    def construir_tabla_madera(self):
+        self.presentacion.tipo = "Tabla de madera"
+
+    def construir_plato_ceramica_clasica(self):
+        self.presentacion.tipo = "Plato de cerámica clásica"
+
+    def construir_plataforma_plata(self):
+        self.presentacion.tipo = "Sobre plataforma de plata"
+
+    def construir_plataforma_oro(self):
+        self.presentacion.tipo = "Sobre plataforma de oro"
+
+    def construir_plato_cristal(self):
+        self.presentacion.tipo = "Plato de cristal"
+
+    def construir_sobre_piedra(self):
+        self.presentacion.tipo = "Sobre piedra"
+
+    def construir_plato_terracota(self):
+        self.presentacion.tipo = "Plato de terracota"
+
+    def construir_plato_porcelana(self):
+        self.presentacion.tipo = "Plato de porcelana"
+
+    def obtener_presentacion(self):
+        return self.presentacion
+
+# Director (Cliente)
+class Cliente:
+    def elegir_presentacion(self, builder):
+        print("Opciones de presentación disponibles:")
+        opciones_presentacion = [
+            "Tabla de madera",
+            "Plato de cerámica clásica",
+            "Sobre plataforma de plata",
+            "Sobre plataforma de oro",
+            "Plato de cristal",
+            "Sobre piedra",
+            "Plato de terracota",
+            "Plato de porcelana"
+        ]
+
+        print("Elija el tipo de presentación escribiendo su nombre o número:")
+        for idx, opcion in enumerate(opciones_presentacion, start=1):
+            print(f"{idx}. {opcion}")
+
+        opcion_elegida = input("Su elección: ").capitalize()
+
+        if opcion_elegida == "Tabla de madera" or opcion_elegida == "1":
+            builder.construir_tabla_madera()
+        elif opcion_elegida == "Plato de cerámica clásica" or opcion_elegida == "2":
+            builder.construir_plato_ceramica_clasica()
+        elif opcion_elegida == "Sobre plataforma de plata" or opcion_elegida == "3":
+            builder.construir_plataforma_plata()
+        # Continuar con las demás opciones en un flujo similar
+
+        return builder.obtener_presentacion()
+
+if __name__ == "__main__":
+    builder = PresentacionPizzaBuilder()
+    cliente = Cliente()
+
+    presentacion_elegida = cliente.elegir_presentacion(builder)
+    print(presentacion_elegida)
+```
+
+### ExtrasPizzaBuilder
+Este builder se dedica a los elementos adicionales de la pizza, como bordes rellenos e ingredientes gourmet. Permite seleccionar bordes rellenos con opciones como queso, ajo y queso parmesano, y ingredientes gourmet como trufas, caviar, jamón ibérico, entre otros. Implementado en extras_builder.py
+
+```
+from abc import ABC, abstractmethod
+
+# Producto
+class ExtrasPizza:
+    def __init__(self):
+        self.borde_relleno = ""
+        self.ingredientes_gourmet = []
+
+    def __str__(self):
+        return f"Borde relleno: {self.borde_relleno}, Ingredientes gourmet: {self.ingredientes_gourmet}"
+
+# Builder abstracto
+class BuilderExtrasPizza(ABC):
+    @abstractmethod
+    def reset(self):
+        pass
+
+    @abstractmethod
+    def anadir_borde_relleno(self, opcion):
+        pass
+
+    @abstractmethod
+    def anadir_ingredientes_gourmet(self, opcion):
+        pass
+
+    @abstractmethod
+    def obtener_extras(self):
+        pass
+
+# Concrete Builder
+class ExtrasPizzaBuilder(BuilderExtrasPizza):
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.extras = ExtrasPizza()
+
+    def anadir_borde_relleno(self, opcion):
+        self.extras.borde_relleno = opcion
+
+    def anadir_ingredientes_gourmet(self, opcion):
+        self.extras.ingredientes_gourmet.append(opcion)
+
+    def obtener_extras(self):
+        return self.extras
+
+# Director (Cliente)
+class Cliente:
+    def elegir_extras(self, builder):
+        quiere_borde_relleno = input("¿Desea su borde relleno? (Sí/No): ")
+        if quiere_borde_relleno.lower() == "sí":
+            print("¿Qué borde relleno desea?")
+            print("1. Relleno de queso")
+            print("2. Ajo y queso parmesano")
+            print("3. Crust de queso")
+            print("4. Relleno de pepperoni o jamón")
+            print("5. Relleno de verduras")
+
+            borde = input("Su elección (borde relleno): ")
+            opciones_borde = {
+                "1": "Relleno de queso",
+                "2": "Ajo y queso parmesano",
+                "3": "Crust de queso",
+                "4": "Relleno de pepperoni o jamón",
+                "5": "Relleno de verduras"
+            }
+            builder.anadir_borde_relleno(opciones_borde.get(borde, ""))
+
+        quiere_ingredientes_gourmet = input("¿Desea algún ingrediente gourmet? (Sí/No): ")
+        if quiere_ingredientes_gourmet.lower() == "sí":
+            print("¿Qué ingrediente gourmet desea?")
+            print("1. Trufas")
+            print("2. Caviar")
+            print("3. Foie Gras")
+            print("4. Jamón Ibérico")
+            print("5. Quesos exclusivos")
+            print("6. Setas silvestres")
+            print("7. Mariscos de alta calidad")
+            print("8. Verduras orgánicas y raras")
+
+            ingrediente = input("Su elección (ingrediente gourmet): ")
+            opciones_ingredientes = {
+                "1": "Trufas",
+                "2": "Caviar",
+                "3": "Foie Gras",
+                "4": "Jamón Ibérico",
+                "5": "Quesos exclusivos",
+                "6": "Setas silvestres",
+                "7": "Mariscos de alta calidad",
+                "8": "Verduras orgánicas y raras"
+            }
+            builder.anadir_ingredientes_gourmet(opciones_ingredientes.get(ingrediente, ""))
+
+        return builder.obtener_extras()
+
+if __name__ == "__main__":
+    builder = ExtrasPizzaBuilder()
+    cliente = Cliente()
+
+    extras_elegidos = cliente.elegir_extras(builder)
+    print(extras_elegidos)
+```
